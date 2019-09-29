@@ -1,30 +1,29 @@
 package com.example.theliers
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main2.*
+import kotlinx.android.synthetic.main.activity_main2.btn_history
 
-class MainActivity : AppCompatActivity() {
-
-
+class Main2Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction().replace(R.id.fragment, Fragment_Playing()).commit()
+        setContentView(R.layout.activity_main2)
 
-        ibtn_playing.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.fragment, Fragment_Playing()).commit()
+        btn_newGame.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
-        ibtn_history.setOnClickListener {
+        btn_history.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(R.id.fragment, Fragment_History()).commit()
         }
 
-        ibtn_rules.setOnClickListener {
+        btn_rules.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(R.id.fragment, Fragment_Rules()).commit()
         }
     }
-
 }
