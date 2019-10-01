@@ -2,8 +2,6 @@ package com.example.theliers
 
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
-import android.content.Intent
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,7 @@ import java.io.IOException
 
 class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    class ViewAdapter(val handler: Handler) : RecyclerView.Adapter<BluetoothItemViewHolder>(){
+    class ViewAdapter(private val mainActivity: MainActivity) : RecyclerView.Adapter<BluetoothItemViewHolder>(){
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BluetoothItemViewHolder {
             return BluetoothItemViewHolder(
@@ -41,12 +39,12 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
 
             holder.itemView.setOnClickListener {
                 println("----------------cnnecting")
-                val connectAsClient = ConnectThread(item, handler)
+                val connectAsClient = ConnectThread(item, mainActivity)
                 connectAsClient.start()
             }
         }
 
-        private inner class ConnectThread(device: BluetoothDevice, handler: Handler) : Thread() {
+        private inner class ConnectThread(device: BluetoothDevice, val mainActivity: MainActivity) : Thread() {
 
             private val mmSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
                 device.createRfcommSocketToServiceRecord(MY_UUID)
@@ -56,27 +54,36 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
                 // Cancel discovery because it otherwise slows down the connection.
                 bluetoothAdaptor?.cancelDiscovery()
 
-                mmSocket?.use { socket ->
+                mmSocket?.let { socket ->
                     // Connect to the remote device through the socket. This call blocks
                     // until it succeeds or throws an exception.
+                    //---------------
+                    /*val clazz = socket.remoteDevice.javaClass
+                    val paramTypes = arrayOf<Class<*>>(Integer.TYPE)
+                    val m = clazz.getMethod("createRfcommSocket", *paramTypes)
+                    val fallbackSocket = m.invoke(socket.remoteDevice, Integer.valueOf(1)) as BluetoothSocket*/
+                    //---------------
                     socket.connect()
-
+                    println("checking connection status")
+                    println("+++++++")
+                    println(socket.isConnected)
+                    println(socket.remoteDevice)
                     // The connection attempt succeeded. Perform work associated with
                     // the connection in a separate thread.
                     // false is for client
-                    BluetoothHandler.manageMyConnectedSocket(socket, false, handler)
+                    BluetoothHandler.manageMyConnectedSocket(socket, false, mainActivity)
                     //val intent = Intent(this,MainActivity::class.java)
                 }
             }
 
-            /*// Closes the client socket and causes the thread to finish.
+            // Closes the client socket and causes the thread to finish.
             fun cancel() {
                 try {
                     mmSocket?.close()
                 } catch (e: IOException) {
                     Log.e("client socket", "Could not close the client socket", e)
                 }
-            }*/
+            }
         }
     }
 }

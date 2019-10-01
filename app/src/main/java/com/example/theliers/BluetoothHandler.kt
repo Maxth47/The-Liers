@@ -6,7 +6,9 @@ import android.bluetooth.BluetoothSocket
 import android.os.Handler
 
 object BluetoothHandler {
-    private lateinit var handler: Handler
+
+    lateinit var socket: BluetoothSocket
+    private var type: Boolean = false
     val bluetoothAdaptor: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 
     fun checkBluetoothAvail(): Boolean {
@@ -42,13 +44,12 @@ object BluetoothHandler {
         }
     }
 
-    fun manageMyConnectedSocket(socket: BluetoothSocket, type: Boolean, mhandler: Handler) {
-        handler = mhandler
-        println("---------------------------------------------------")
-        println("---------------------------------------------------")
+    fun manageMyConnectedSocket(mSocket: BluetoothSocket, type: Boolean, mainActivity: MainActivity) {
+        socket = mSocket
+        println("")
+        println("------init-------------------------------------")
         println(socket.connectionType)
         println(socket.isConnected)
-
         // check connection type
         if (type) {
             println("connect as host")
@@ -56,12 +57,19 @@ object BluetoothHandler {
             println("connect as client")
         }
         // start direct communication
-        val connectionService = MyBluetoothService(handler, type)
-        connectionService.initCommunication(socket)
+        mainActivity.goToPlay()
+        println(socket.isConnected)
     }
 
-    fun getCurrentHandler(): Handler {
-        return handler
+    fun startBluetoothComm (handler: Handler): MyBluetoothService {
+        val connectionService = MyBluetoothService(handler, type)
+        println("-------------------------------------------------------")
+        println("--------------------starting commute-------------------")
+        println(socket.isConnected)
+        connectionService.initCommunication(socket)
+        return connectionService
     }
+
+
 
 }

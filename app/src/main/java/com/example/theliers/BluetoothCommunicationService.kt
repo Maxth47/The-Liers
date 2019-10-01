@@ -14,18 +14,25 @@ const val MESSAGE_WRITE = 3
 private const val TAG = "MY_APP_DEBUG_TAG"
 
 class MyBluetoothService(private val handler: Handler, val type: Boolean) {
+    private lateinit var mThread: ConnectedThread
 
     fun initCommunication(socket: BluetoothSocket) {
-        val mThread = ConnectedThread(socket)
+        println("service start:::::::::")
+        println(socket.isConnected)
+        mThread = ConnectedThread(socket)
         mThread.start()
     }
+
+    fun sendInfo(info: String) {
+        mThread.write(info.toByteArray())
+    }
+
     private inner class ConnectedThread(private val mmSocket: BluetoothSocket) : Thread() {
 
-        private val mmInStream: InputStream = mmSocket.inputStream
-        private val mmOutStream: OutputStream = mmSocket.outputStream
         private val mmBuffer: ByteArray = ByteArray(1024) // mmBuffer store for the stream
 
         override fun run() {
+            val mmInStream: InputStream = mmSocket.inputStream
             var numBytes: Int // bytes returned from read()
 
             // Keep listening to the InputStream until an exception occurs.
@@ -37,18 +44,24 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                     Log.d(TAG, "Input stream was disconnected", e)
                     break
                 }
-
+                println("-----------------------message received----------------------------------")
+                println(numBytes)
                 // Send the obtained bytes to the UI activity.
-                val readMsg = handler.obtainMessage(
-                    MESSAGE_READ, numBytes, -1,
-                    mmBuffer)
-                readMsg.sendToTarget()
+                val readMsg = handler.obtainMessage()
+                readMsg.obj = numBytes.toString()
+                readMsg.what = 0
+                handler.sendMessage(readMsg)
             }
         }
 
         // Call this from the main activity to send data to the remote device.
         fun write(bytes: ByteArray) {
+            val mmOutStream: OutputStream = mmSocket.outputStream
             try {
+                println("------------------------------------------------------------------")
+                println("------------------------------------------------------------------")
+                println(mmSocket.isConnected)
+                println(mmSocket)
                 mmOutStream.write(bytes)
             } catch (e: IOException) {
                 Log.e(TAG, "Error occurred when sending data", e)

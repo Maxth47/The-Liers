@@ -12,6 +12,7 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_bluetooth.*
@@ -21,23 +22,26 @@ import java.util.*
 const val REQUEST_ENABLE_BT = 1001
 const val NAME = "Liars Game"
 val MY_UUID: UUID = UUID.fromString("085ec7de-e20e-432f-a929-4667b495eeef")
+val MY_CLIENT_UUID: UUID = UUID.fromString("95463e87-d97c-4193-acac-abbcaf57696c")
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var handler: Handler
+    private val handler: Handler = object : Handler(Looper.getMainLooper()){
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bluetooth)
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)
-
+        //requestDiscovery()
         //init handler
-        handler = Handler()
+
 
         //set up buttons
         hostButton.setOnClickListener {
             //BluetoothHandler.cancelBluetoothDiscovery()
             //BluetoothHandler.checkBluetoothBond()
-            val  acceptThread = AcceptThread(handler)
+            val  acceptThread = AcceptThread( this)
             acceptThread.start()
         }
 
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, filter)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = BluetoothItemViewHolder.ViewAdapter(handler)
+        recyclerView.adapter = BluetoothItemViewHolder.ViewAdapter(this)
         recyclerView.adapter!!.notifyDataSetChanged()
 
     }
@@ -105,8 +109,10 @@ class MainActivity : AppCompatActivity() {
                     println("-------------------------------------------")
                     println("found device")
                     println("$deviceName $deviceHardwareAddress")
-                    BluetoothDevices.list.add(device)
-                    recyclerView.adapter!!.notifyDataSetChanged()
+                    if (!BluetoothDevices.list.contains(device) && device.type != BluetoothDevice.DEVICE_TYPE_LE) {
+                        BluetoothDevices.list.add(device)
+                        recyclerView.adapter!!.notifyDataSetChanged()
+                    }
                 }
             }
         }
@@ -136,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         unregisterReceiver(receiver)
     }
 
-    private class AcceptThread(val handler: Handler) : Thread() {
+    private class AcceptThread(val mainActivity: MainActivity) : Thread() {
 
         private val mmServerSocket: BluetoothServerSocket? by lazy(LazyThreadSafetyMode.NONE) {
             BluetoothHandler.bluetoothAdaptor?.listenUsingInsecureRfcommWithServiceRecord(NAME, MY_UUID)
@@ -154,22 +160,27 @@ class MainActivity : AppCompatActivity() {
                     null
                 }
                 socket?.also {
-                    BluetoothHandler.manageMyConnectedSocket(it, true, handler)
+                    BluetoothHandler.manageMyConnectedSocket(it, true, mainActivity)
                     // true is for host
+                    println("closes server socket")
                     mmServerSocket?.close()
                     shouldLoop = false
                 }
             }
         }
 
-
         // Closes the connect socket and causes the thread to finish.
-        /*fun cancel() {
+        fun cancel() {
             try {
                 mmServerSocket?.close()
             } catch (e: IOException) {
                 Log.e("socket: ", "Could not close the connect socket", e)
             }
-        }*/
+        }
+    }
+
+    fun goToPlay() {
+        val intent = Intent(this, PlayActivity::class.java)
+        startActivity(intent)
     }
 }
