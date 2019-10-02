@@ -30,9 +30,11 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
     private inner class ConnectedThread(private val mmSocket: BluetoothSocket) : Thread() {
 
         private val mmBuffer: ByteArray = ByteArray(1024) // mmBuffer store for the stream
+        private val mmInStream: InputStream = mmSocket.inputStream
+        private val mmOutStream: OutputStream = mmSocket.outputStream
 
         override fun run() {
-            val mmInStream: InputStream = mmSocket.inputStream
+
             var numBytes: Int // bytes returned from read()
 
             // Keep listening to the InputStream until an exception occurs.
@@ -48,7 +50,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                 println(numBytes)
                 // Send the obtained bytes to the UI activity.
                 val readMsg = handler.obtainMessage()
-                readMsg.obj = numBytes.toString()
+                readMsg.obj = numBytes
                 readMsg.what = 0
                 handler.sendMessage(readMsg)
             }
@@ -56,7 +58,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
 
         // Call this from the main activity to send data to the remote device.
         fun write(bytes: ByteArray) {
-            val mmOutStream: OutputStream = mmSocket.outputStream
+
             try {
                 println("------------------------------------------------------------------")
                 println("------------------------------------------------------------------")
