@@ -11,9 +11,10 @@ class PlayActivity : AppCompatActivity() {
 
     private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(inputMessage: Message) {
-            //text_network.text = "does it work"
+            println("does this receive?")
             if (inputMessage.what == 0) {
-                play_text.text = inputMessage.obj.toString()
+                val byteArray = inputMessage.obj as ByteArray
+                play_text.text = byteArray.toString(Charsets.UTF_8)
                 println("it works somewhat")
             }
         }
@@ -22,9 +23,10 @@ class PlayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play)
         val bluetoothService = BluetoothHandler.startBluetoothComm(mHandler)
-
+        var i = 0
         testButton.setOnClickListener {
-            bluetoothService.sendInfo("sending info over")
+            bluetoothService.sendInfo("$i $i $i $i $i $i $i $i")
+            i++
         }
 
     }

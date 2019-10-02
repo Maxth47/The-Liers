@@ -21,6 +21,7 @@ import java.util.*
 
 const val REQUEST_ENABLE_BT = 1001
 const val NAME = "Liars Game"
+
 val MY_UUID: UUID = UUID.fromString("085ec7de-e20e-432f-a929-4667b495eeef")
 val MY_CLIENT_UUID: UUID = UUID.fromString("95463e87-d97c-4193-acac-abbcaf57696c")
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bluetooth)
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)
-        //requestDiscovery()
+        requestDiscovery()
         //init handler
 
 

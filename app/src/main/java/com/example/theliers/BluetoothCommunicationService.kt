@@ -4,9 +4,9 @@ import android.bluetooth.BluetoothSocket
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
+
+import java.io.*
+
 
 const val MESSAGE_READ = 1
 const val MESSAGE_TOAST = 2
@@ -24,7 +24,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
     }
 
     fun sendInfo(info: String) {
-        mThread.write(info.toByteArray())
+        mThread.write(info.toByteArray( Charsets.UTF_8))
     }
 
     private inner class ConnectedThread(private val mmSocket: BluetoothSocket) : Thread() {
@@ -46,14 +46,19 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                     Log.d(TAG, "Input stream was disconnected", e)
                     break
                 }
-                println("-----------------------message received----------------------------------")
-                println(numBytes)
+                println(mmBuffer.toString( Charsets.UTF_8))
                 // Send the obtained bytes to the UI activity.
-                val readMsg = handler.obtainMessage()
-                readMsg.obj = numBytes
+                val readMsg = handler.obtainMessage(
+                    MESSAGE_READ, numBytes, -1,
+                    mmBuffer)
+                println("  -  ")
                 readMsg.what = 0
-                handler.sendMessage(readMsg)
+
+                println(readMsg)
+                readMsg.sendToTarget()
+
             }
+
         }
 
         // Call this from the main activity to send data to the remote device.
@@ -62,6 +67,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
             try {
                 println("------------------------------------------------------------------")
                 println("------------------------------------------------------------------")
+                println(bytes)
                 println(mmSocket.isConnected)
                 println(mmSocket)
                 mmOutStream.write(bytes)
