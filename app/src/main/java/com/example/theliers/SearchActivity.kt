@@ -15,7 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_bluetooth.*
+import kotlinx.android.synthetic.main.activity_bluetooth_search.*
 import java.io.IOException
 import java.util.*
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bluetooth)
+        setContentView(R.layout.activity_bluetooth_search)
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)
         requestDiscovery()
@@ -181,7 +181,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToPlay() {
-        val intent = Intent(this, PlayActivity::class.java)
+        val intent = Intent(this, FuncPlayActivity::class.java)
         startActivity(intent)
     }
 }

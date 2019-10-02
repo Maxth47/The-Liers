@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import kotlinx.android.synthetic.main.activity_play.*
+import kotlinx.android.synthetic.main.activity_func_play.*
 
-class PlayActivity : AppCompatActivity() {
+class FuncPlayActivity : AppCompatActivity() {
 
     private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(inputMessage: Message) {
@@ -21,7 +21,7 @@ class PlayActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_play)
+        setContentView(R.layout.activity_func_play)
         val bluetoothService = BluetoothHandler.startBluetoothComm(mHandler)
         var i = 0
         testButton.setOnClickListener {
