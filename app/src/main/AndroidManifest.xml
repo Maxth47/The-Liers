@@ -12,10 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/GameTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Main2Activity" />
+        <activity android:name=".PlayActivity"></activity>
+        <activity android:name=".MenuActivity" />
         <activity
-            android:name=".Main3Activity"
+            android:name=".StartActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
