@@ -58,7 +58,7 @@ class Fragment_Rules: Fragment() {
 
     //create a worker with a Handler as parameter
     class Conn(mHand: Handler): Runnable {
-        val myHandler = mHand
+        private val myHandler = mHand
         override fun run() {
             var content = StringBuilder()
             try {
