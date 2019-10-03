@@ -42,16 +42,17 @@ class Fragment_Rules: Fragment() {
 
     // create a handle to add message
     private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
-        override fun handleMessage(inputMessage: Message) { if (inputMessage.what == 0) {
-            txt_rules.text = inputMessage.obj.toString()
-            txt_rules.setMovementMethod(ScrollingMovementMethod())
+        override fun handleMessage(inputMessage: Message) {
+            if (inputMessage.what == 0) {
+                txt_rules.text = inputMessage.obj.toString()
+                txt_rules.movementMethod = ScrollingMovementMethod()
+            }
         }
-        } }
+    }
 
     // first, check if network is available.
-    private fun isNetworkAvailable(): Boolean { val cm = requireActivity().getSystemService(
-        Context.CONNECTIVITY_SERVICE
-    ) as ConnectivityManager
+    private fun isNetworkAvailable(): Boolean {
+        val cm = requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo?.isConnected == true
     }
 
@@ -60,7 +61,7 @@ class Fragment_Rules: Fragment() {
     class Conn(mHand: Handler): Runnable {
         private val myHandler = mHand
         override fun run() {
-            var content = StringBuilder()
+            val content = StringBuilder()
             try {
                 // declare URL to text file, create a connection to it and put into stream.
                 val myUrl = URL("http://users.metropolia.fi/~thanhvl/HowToPlayLiarDice.txt")

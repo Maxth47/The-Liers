@@ -52,7 +52,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                     MESSAGE_READ, numBytes, -1,
                     mmBuffer)
                 println("  -  ")
-                readMsg.what = 0
+                readMsg.what = 1
 
                 println(readMsg)
                 readMsg.sendToTarget()

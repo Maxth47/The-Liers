@@ -13,7 +13,7 @@ class MenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
         btn_newGame.setOnClickListener {
-            val intent = Intent(this, PlayActivity::class.java)
+            val intent = Intent(this, ChooseActivity::class.java)
             startActivity(intent)
         }
 

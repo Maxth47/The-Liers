@@ -15,7 +15,7 @@ import java.io.IOException
 
 class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    class ViewAdapter(private val mainActivity: MainActivity) : RecyclerView.Adapter<BluetoothItemViewHolder>(){
+    class ViewAdapter(private val searchActivity: SearchActivity) : RecyclerView.Adapter<BluetoothItemViewHolder>(){
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BluetoothItemViewHolder {
             return BluetoothItemViewHolder(
@@ -39,12 +39,12 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
 
             holder.itemView.setOnClickListener {
                 println("----------------cnnecting")
-                val connectAsClient = ConnectThread(item, mainActivity)
+                val connectAsClient = ConnectThread(item, searchActivity)
                 connectAsClient.start()
             }
         }
 
-        private inner class ConnectThread(device: BluetoothDevice, val mainActivity: MainActivity) : Thread() {
+        private inner class ConnectThread(device: BluetoothDevice, val searchActivity: SearchActivity) : Thread() {
 
             private val mmSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
                 device.createRfcommSocketToServiceRecord(MY_UUID)
@@ -71,7 +71,7 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
                     // The connection attempt succeeded. Perform work associated with
                     // the connection in a separate thread.
                     // false is for client
-                    BluetoothHandler.manageMyConnectedSocket(socket, false, mainActivity)
+                    BluetoothHandler.manageMyConnectedSocket(socket, false, searchActivity, null)
                     //val intent = Intent(this,MainActivity::class.java)
                 }
             }

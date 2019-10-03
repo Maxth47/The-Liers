@@ -12,7 +12,7 @@ class FuncPlayActivity : AppCompatActivity() {
     private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(inputMessage: Message) {
             println("does this receive?")
-            if (inputMessage.what == 0) {
+            if (inputMessage.what == 1) {
                 val byteArray = inputMessage.obj as ByteArray
                 play_text.text = byteArray.toString(Charsets.UTF_8)
                 println("it works somewhat")

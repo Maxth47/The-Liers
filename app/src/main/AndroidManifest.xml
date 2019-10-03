@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/GameTheme">
-        <activity android:name=".PlayActivity"></activity>
+        <activity android:name=".ChooseActivity"></activity>
+        <activity android:name=".HostActivity" />
+        <activity android:name=".PlayActivity" />
         <activity android:name=".MenuActivity" />
         <activity
             android:name=".StartActivity"
@@ -28,6 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".FuncPlayActivity" />
     </application>
 
 </manifest>

@@ -44,7 +44,7 @@ object BluetoothHandler {
         }
     }
 
-    fun manageMyConnectedSocket(mSocket: BluetoothSocket, type: Boolean, mainActivity: MainActivity) {
+    fun manageMyConnectedSocket(mSocket: BluetoothSocket, type: Boolean, searchActivity: SearchActivity?, hostActivity: HostActivity?) {
         socket = mSocket
         println("")
         println("------init-------------------------------------")
@@ -57,7 +57,8 @@ object BluetoothHandler {
             println("connect as client")
         }
         // start direct communication
-        mainActivity.goToPlay()
+        searchActivity?.goToPlay()
+        hostActivity?.goToPlay()
         println(socket.isConnected)
     }
 
@@ -69,7 +70,4 @@ object BluetoothHandler {
         connectionService.initCommunication(socket)
         return connectionService
     }
-
-
-
 }
