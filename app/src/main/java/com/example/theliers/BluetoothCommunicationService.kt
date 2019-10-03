@@ -6,6 +6,7 @@ import android.os.Handler
 import android.util.Log
 
 import java.io.*
+import java.nio.charset.StandardCharsets
 
 
 const val MESSAGE_READ = 1
@@ -24,12 +25,12 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
     }
 
     fun sendInfo(info: String) {
-        mThread.write(info.toByteArray( Charsets.UTF_8))
+        mThread.write(info.toByteArray( StandardCharsets.UTF_8))
     }
 
     private inner class ConnectedThread(private val mmSocket: BluetoothSocket) : Thread() {
 
-        private val mmBuffer: ByteArray = ByteArray(1024) // mmBuffer store for the stream
+        private val mmBuffer: ByteArray = ByteArray(DEFAULT_BUFFER_SIZE) // mmBuffer store for the stream
         private val mmInStream: InputStream = mmSocket.inputStream
         private val mmOutStream: OutputStream = mmSocket.outputStream
 
@@ -46,11 +47,12 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                     Log.d(TAG, "Input stream was disconnected", e)
                     break
                 }
-                println(mmBuffer.toString( Charsets.UTF_8))
+                val strWithoutZeros = String(mmBuffer, StandardCharsets.UTF_8).replace(0.toChar().toString(), "")
+
                 // Send the obtained bytes to the UI activity.
                 val readMsg = handler.obtainMessage(
                     MESSAGE_READ, numBytes, -1,
-                    mmBuffer)
+                    strWithoutZeros)
                 println("  -  ")
                 readMsg.what = 1
 
@@ -67,9 +69,10 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
             try {
                 println("------------------------------------------------------------------")
                 println("------------------------------------------------------------------")
-                println(bytes)
+                println(bytes.toString(StandardCharsets.UTF_8))
                 println(mmSocket.isConnected)
                 println(mmSocket)
+
                 mmOutStream.write(bytes)
             } catch (e: IOException) {
                 Log.e(TAG, "Error occurred when sending data", e)
@@ -79,8 +82,8 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                 val bundle = Bundle().apply {
                     putString("toast", "Couldn't send data to the other device")
                 }
-                writeErrorMsg.data = bundle
-                handler.sendMessage(writeErrorMsg)
+                //writeErrorMsg.data = bundle
+                //handler.sendMessage(writeErrorMsg)
                 return
             }
 

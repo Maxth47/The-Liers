@@ -19,9 +19,9 @@
         <activity android:name=".ChooseActivity"></activity>
         <activity android:name=".HostActivity" />
         <activity android:name=".PlayActivity" />
-        <activity android:name=".MenuActivity" />
+        <activity android:name=".StartActivity" />
         <activity
-            android:name=".StartActivity"
+            android:name=".MenuActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>

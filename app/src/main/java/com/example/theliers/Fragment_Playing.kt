@@ -50,15 +50,15 @@ class Fragment_Playing: Fragment(), ShakeDetector.Listener, AdapterView.OnItemSe
         dice_no10.setImageResource(R.drawable.ic_dice_)
 
         if (playableState){
-            var sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
-            var shakeDetector = ShakeDetector(this)
+            val sensorManager = requireActivity().getSystemService(Context.SENSOR_SERVICE) as SensorManager
+            val shakeDetector = ShakeDetector(this)
             shakeDetector.start(sensorManager)
         }
     }
 
     override fun hearShake() {
         shakeTurn ++
-        var ran = listOf<Int>()
+        val ran = mutableListOf<Int>()
         for (x in 1..5) {
             ran += (1..6).random()
         }
@@ -89,7 +89,7 @@ class Fragment_Playing: Fragment(), ShakeDetector.Listener, AdapterView.OnItemSe
         }
     }
 
-    fun setDiceImage(imageView: ImageView, number: Int){
+    private fun setDiceImage(imageView: ImageView, number: Int){
         when (number) {
             1 -> imageView.setImageResource(R.drawable.ic_dice_1)
             2 -> imageView.setImageResource(R.drawable.ic_dice_2)
