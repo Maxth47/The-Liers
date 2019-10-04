@@ -30,7 +30,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
 
     private inner class ConnectedThread(private val mmSocket: BluetoothSocket) : Thread() {
 
-        private val mmBuffer: ByteArray = ByteArray(DEFAULT_BUFFER_SIZE) // mmBuffer store for the stream
+        // mmBuffer store for the stream
         private val mmInStream: InputStream = mmSocket.inputStream
         private val mmOutStream: OutputStream = mmSocket.outputStream
 
@@ -40,6 +40,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
 
             // Keep listening to the InputStream until an exception occurs.
             while (true) {
+                val mmBuffer: ByteArray = ByteArray(DEFAULT_BUFFER_SIZE)
                 // Read from the InputStream.
                 numBytes = try {
                     mmInStream.read(mmBuffer)
@@ -87,10 +88,6 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                 return
             }
 
-            // Share the sent message with the UI activity.
-            val writtenMsg = handler.obtainMessage(
-                MESSAGE_WRITE, -1, -1, mmBuffer)
-            writtenMsg.sendToTarget()
         }
 
         // Call this method from the main activity to shut down the connection.
