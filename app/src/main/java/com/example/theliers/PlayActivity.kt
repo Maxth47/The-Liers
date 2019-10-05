@@ -95,13 +95,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         } else {
             Toast.makeText(this, "No dice saved", Toast.LENGTH_LONG).show()
         }
-//
-//        if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-//            val filePath = this?.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-//            val file = File(filePath, "History.txt")
-//            if(file.exists()) txtView.text = file.readText()
-//            else txtView.text = "No text available"
-//        }
 
     }
 

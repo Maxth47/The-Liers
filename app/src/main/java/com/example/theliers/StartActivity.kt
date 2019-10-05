@@ -14,12 +14,21 @@ class StartActivity : AppCompatActivity() {
 
         btn_start.setOnClickListener {
             if (edt_name.text.isNotEmpty()){
+                val sharedPreference = SharedPreference(this)
+                sharedPreference.setUsername(edt_name.text.toString())
                 val intent = Intent(this, MenuActivity::class.java)
                 startActivity(intent)
+                Toast.makeText(this, "Hello "+edt_name.text+", Welcome to The Liar game :)", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Please, Enter your name first.", Toast.LENGTH_SHORT).show()
             }
 
         }
+
+        btn_aboutUs.setOnClickListener {
+            Toast.makeText(this, "Metropolia Developers: Thanh Le, Son Bui", Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 }

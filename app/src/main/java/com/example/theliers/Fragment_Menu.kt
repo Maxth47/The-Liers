@@ -6,6 +6,7 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 import kotlinx.android.synthetic.main.fragment_menu.*
@@ -43,6 +44,18 @@ class Fragment_Menu: Fragment() {
         }
 
         btn_reset.setOnClickListener {
+
+            val sharedPreference = SharedPreference(this.requireActivity())
+            sharedPreference.setUsername("")
+
+            if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+                val filePath = context?.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+                val file = File(filePath, "History.txt")
+                file.delete()
+            } else {
+                Toast.makeText(context, "No Data to delete", Toast.LENGTH_LONG).show()
+            }
+
             val intent = Intent(context, StartActivity::class.java)
             startActivity(intent)
         }
