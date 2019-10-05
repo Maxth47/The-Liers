@@ -1,4 +1,4 @@
-package com.example.theliers
+package com.example.theliers.bluetooth
 
 import android.bluetooth.BluetoothDevice
 

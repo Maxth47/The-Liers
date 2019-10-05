@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import com.example.theliers.bluetooth.BluetoothHandler
 import kotlinx.android.synthetic.main.activity_func_play.*
 import kotlinx.android.synthetic.main.activity_play.*
 

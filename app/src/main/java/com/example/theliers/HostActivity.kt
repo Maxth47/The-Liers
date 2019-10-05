@@ -7,6 +7,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.theliers.bluetooth.BluetoothHandler
 import kotlinx.android.synthetic.main.activity_host.*
 import java.io.IOException
 

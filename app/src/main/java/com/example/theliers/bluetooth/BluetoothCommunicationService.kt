@@ -1,4 +1,4 @@
-package com.example.theliers
+package com.example.theliers.bluetooth
 
 import android.bluetooth.BluetoothSocket
 import android.os.Bundle
@@ -26,6 +26,10 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
 
     fun sendInfo(info: String) {
         mThread.write(info.toByteArray( StandardCharsets.UTF_8))
+    }
+
+    fun stopConnect() {
+        mThread.cancel()
     }
 
     private inner class ConnectedThread(private val mmSocket: BluetoothSocket) : Thread() {

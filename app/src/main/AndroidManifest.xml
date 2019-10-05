@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/GameTheme">
-        <activity android:name=".ChooseActivity"></activity>
+        <activity android:name=".LoseActivity"></activity>
+        <activity android:name=".winActivity" />
+        <activity android:name=".ChooseActivity" />
         <activity android:name=".HostActivity" />
         <activity android:name=".PlayActivity" />
         <activity android:name=".StartActivity" />

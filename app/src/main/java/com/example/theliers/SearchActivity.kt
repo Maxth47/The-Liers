@@ -1,6 +1,5 @@
 package com.example.theliers
 
-import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
@@ -10,6 +9,9 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.theliers.bluetooth.BluetoothDevices
+import com.example.theliers.bluetooth.BluetoothHandler
+import com.example.theliers.bluetooth.BluetoothItemViewHolder
 import kotlinx.android.synthetic.main.activity_bluetooth_search.*
 import java.util.*
 

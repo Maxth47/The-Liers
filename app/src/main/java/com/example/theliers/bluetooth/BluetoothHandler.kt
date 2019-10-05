@@ -1,9 +1,11 @@
-package com.example.theliers
+package com.example.theliers.bluetooth
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.os.Handler
+import com.example.theliers.HostActivity
+import com.example.theliers.SearchActivity
 
 object BluetoothHandler {
 
@@ -63,7 +65,10 @@ object BluetoothHandler {
     }
 
     fun startBluetoothComm (handler: Handler): MyBluetoothService {
-        val connectionService = MyBluetoothService(handler, type)
+        val connectionService = MyBluetoothService(
+            handler,
+            type
+        )
         println("-------------------------------------------------------")
         println("--------------------starting commute-------------------")
         println(socket.isConnected)
