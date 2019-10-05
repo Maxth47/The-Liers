@@ -1,9 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/txt_history"/>
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorYellow">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Go back"
+            android:id="@+id/btn_goBackFromHistory"
+            android:layout_alignParentLeft="true"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:text="history"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@color/colorOrange"
+        android:textSize="30sp"
+        android:ellipsize="marquee"
+        android:id="@+id/txt_history"/>
+
+    <TextView
+        android:id="@+id/txt_winning_rate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorYellow"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:text="113 : Name : 76%"/>
 </LinearLayout>
