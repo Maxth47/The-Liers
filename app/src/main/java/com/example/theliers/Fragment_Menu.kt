@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_start.*
 
 import kotlinx.android.synthetic.main.fragment_menu.*
 import java.io.File
@@ -25,6 +26,9 @@ class Fragment_Menu: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreference = SharedPreference(this.requireActivity())
+        Toast.makeText(context, "Hello "+sharedPreference.getUsername()+", Welcome to The Liar game :)", Toast.LENGTH_SHORT).show()
 
         btn_newGame.setOnClickListener {
             val intent = Intent(context, PlayActivity::class.java)
@@ -48,13 +52,9 @@ class Fragment_Menu: Fragment() {
             val sharedPreference = SharedPreference(this.requireActivity())
             sharedPreference.setUsername("")
 
-            if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-                val filePath = context?.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-                val file = File(filePath, "History.txt")
-                file.delete()
-            } else {
-                Toast.makeText(context, "No Data to delete", Toast.LENGTH_LONG).show()
-            }
+            val filePath = context?.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            val file = File(filePath, "History.txt")
+            file.delete()
 
             val intent = Intent(context, StartActivity::class.java)
             startActivity(intent)
