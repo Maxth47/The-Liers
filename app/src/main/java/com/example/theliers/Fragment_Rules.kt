@@ -20,6 +20,13 @@ import java.net.URL
 
 class Fragment_Rules: Fragment() {
 
+    companion object {
+        val TAG = Fragment_Rules::class.java.simpleName
+        @JvmStatic
+        fun newInstance() = Fragment_Rules()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,7 +44,15 @@ class Fragment_Rules: Fragment() {
             val myThread = Thread(myRunnable)
             myThread.start()
         }
+
+        btn_goBackFromRules.setOnClickListener {
+            var fr = getFragmentManager()?.beginTransaction()
+            fr?.replace(R.id.fragment, Fragment_Menu())
+            fr?.commit()
+        }
     }
+
+
 
 
     // create a handle to add message

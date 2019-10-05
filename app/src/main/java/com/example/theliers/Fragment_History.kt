@@ -5,8 +5,11 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.fragment_rules.*
 import java.io.File
 
 class Fragment_History: Fragment() {
@@ -26,6 +29,12 @@ class Fragment_History: Fragment() {
             val file = File(filePath, "History.txt")
             if(file.exists()) txt_history.text = file.readText()
             else txt_history.text = "History empty ..."
+        }
+
+        btn_goBackFromHistory.setOnClickListener {
+            var fr = getFragmentManager()?.beginTransaction()
+            fr?.replace(R.id.fragment, Fragment_Menu())
+            fr?.commit()
         }
     }
 }
