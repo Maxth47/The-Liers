@@ -19,18 +19,38 @@
             android:layout_height="match_parent"
             android:textSize="40sp"
             android:gravity="center"
-            android:text="history"/>
+            android:text="How to play?"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:id="@+id/txt_rules"
-            android:textColor="@color/colorWhite"/>
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:id="@+id/txt_stepTitle"
+                android:text="title"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:textSize="15dp"
+                android:id="@+id/txt_stepContent"
+                android:text="content"/>
+            <ImageView
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:id="@+id/img_stepImage"/>
+        </LinearLayout>
+
 
         <Button
             android:layout_width="wrap_content"
