@@ -15,10 +15,8 @@ class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
-        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1).also {
-            requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)
-        }
-
+        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
+        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)
         // init bluetooth
         initBluetooth()
 

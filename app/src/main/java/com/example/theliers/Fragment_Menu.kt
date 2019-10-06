@@ -31,7 +31,7 @@ class Fragment_Menu: Fragment() {
         Toast.makeText(context, "Hello "+sharedPreference.getUsername()+", Welcome to The Liar game :)", Toast.LENGTH_SHORT).show()
 
         btn_newGame.setOnClickListener {
-            val intent = Intent(context, PlayActivity::class.java)
+            val intent = Intent(context, ChooseActivity::class.java)
             startActivity(intent)
         }
 

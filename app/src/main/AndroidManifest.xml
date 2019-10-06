@@ -20,7 +20,7 @@
         <activity android:name=".winActivity" />
         <activity android:name=".ChooseActivity" />
         <activity android:name=".HostActivity" />
-        <activity android:name=".PlayActivity" />
+        <activity android:name=".PlayActivity"  android:screenOrientation="landscape"/>
         <activity android:name=".StartActivity" />
         <activity
             android:name=".MenuActivity"

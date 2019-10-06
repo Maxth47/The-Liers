@@ -31,7 +31,7 @@ class FuncPlayActivity : AppCompatActivity()  {
                             gameMaster.decideTurn()
                         }
 
-                        "guess" -> {
+                        "bid" -> {
                             getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             takeTurn()
                         }
@@ -94,7 +94,7 @@ class FuncPlayActivity : AppCompatActivity()  {
             startGameButton.isEnabled = false
         }
 
-        //guess button to send bid
+        //bid button to send bid
         guessButton.setOnClickListener {
             guess()
         }
@@ -174,7 +174,7 @@ class FuncPlayActivity : AppCompatActivity()  {
         if(total == totalBid && dice == typeBid) return true
         return false
     }
-    //guess
+    //bid
     fun guess() {
         val total = totalSpinner.selectedItem.toString()
         val type = typeSpinner.selectedItem.toString()
@@ -183,7 +183,7 @@ class FuncPlayActivity : AppCompatActivity()  {
             Toast.makeText(this, "Illegal move", Toast.LENGTH_SHORT).show()
         } else {
 
-            bluetoothService.sendInfo("guess$gibberish$total$gibberish$type")
+            bluetoothService.sendInfo("bid$gibberish$total$gibberish$type")
             yourBid += total + " x " + type + "dice"+"\n"
             yourGuess.text = yourBid
             gameMaster.setCurrentBid(total.toInt(), type.toInt())
@@ -227,7 +227,7 @@ class FuncPlayActivity : AppCompatActivity()  {
         enemyRoll.text = enemyRollArray
     }
 
-    //clear guess history
+    //clear bid history
     fun clearGuessHistory(opponentDice: String) {
         val enemyDice = opponentDice.toInt()+1
         val display = "enemy has $enemyDice dice"

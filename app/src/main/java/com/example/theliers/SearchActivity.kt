@@ -78,7 +78,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun goToPlay() {
-        val intent = Intent(this, FuncPlayActivity::class.java)
+        val intent = Intent(this, PlayActivity::class.java)
         startActivity(intent)
     }
 }
