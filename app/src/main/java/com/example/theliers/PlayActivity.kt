@@ -15,7 +15,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.squareup.seismic.ShakeDetector
 import kotlinx.android.synthetic.main.activity_play.*
-import kotlinx.android.synthetic.main.fragment_playing.*
 import java.io.File
 
 class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.OnItemSelectedListener {
@@ -24,8 +23,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play)
 
-        spinner_1.adapter = this?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.numberOfDice)) }
-        spinner_2.adapter = this?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.whatDice)) }
+        spinner_1.adapter = this.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.numberOfDice)) }
+        spinner_2.adapter = this.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.whatDice)) }
 
         dice_no6.setImageResource(R.drawable.ic_dice_)
         dice_no7.setImageResource(R.drawable.ic_dice_)
@@ -89,7 +88,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         // Save into external storage.
         if(ran.isNotEmpty() && Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             val inputText = ran.toString() + "\n"
-            val filePath = this?.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            val filePath = this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
             val file = File(filePath, "History.txt")
             file.appendText(inputText)
         } else {

@@ -4,34 +4,23 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.os.*
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.android.synthetic.main.fragment_rules.*
 import okhttp3.*
 import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.File
 import java.io.IOException
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.URL
 
+@Suppress("DEPRECATION")
 class Fragment_Rules: Fragment() {
-
-    companion object {
-        val TAG = Fragment_Rules::class.java.simpleName
-        @JvmStatic
-        fun newInstance() = Fragment_Rules()
-    }
-
 
     lateinit var jsonArr:JSONArray
     var jsonArrIndex:Int = 0
@@ -56,7 +45,7 @@ class Fragment_Rules: Fragment() {
             }
 
         btn_goBackFromRules.setOnClickListener {
-            var fr = getFragmentManager()?.beginTransaction()
+            val fr = getFragmentManager()?.beginTransaction()
             fr?.replace(R.id.fragment, Fragment_Menu())
             fr?.commit()
         }
@@ -71,7 +60,6 @@ class Fragment_Rules: Fragment() {
 
         btn_rightArrow.setOnClickListener {
             jsonArrIndex++
-            Toast.makeText(this.requireActivity(), jsonArrIndex.toString() + " / " + jsonArr.length(), Toast.LENGTH_SHORT).show()
             if (jsonArrIndex == jsonArr.length()) jsonArrIndex = jsonArr.length()-1
             txt_stepTitle.text = "Step "+jsonArrIndex+" : "+ jsonArr.getJSONObject(jsonArrIndex).getString("title")
             txt_stepContent.text = jsonArr.getJSONObject(jsonArrIndex).getString("content") +"\n"+jsonArr.getJSONObject(jsonArrIndex).getString("example")
@@ -108,7 +96,6 @@ class Fragment_Rules: Fragment() {
             try {
                 // declare URL to text file, create a connection to it and put into stream.
                 val myUrl = URL("http://users.metropolia.fi/~thanhvl/Liar-Dice-Rules.json")
-                //val myUrl = URL("http://users.metropolia.fi/~thanhvl/HowToPlayLiarDice.txt")
                 val urlConnection = myUrl.openConnection() as HttpURLConnection
                 val inputStream = urlConnection.inputStream
 
