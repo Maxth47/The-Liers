@@ -83,6 +83,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         dice_no8.setImageResource(R.drawable.ic_dice_)
         dice_no9.setImageResource(R.drawable.ic_dice_)
         dice_no10.setImageResource(R.drawable.ic_dice_)
+        displayBid("")
 
         if (playableState){
             val sensorManager = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -128,18 +129,23 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         //txtView.setText(shakeTurn.toString()+ran)
     }
 
+    //reset playable
+    fun resetPlayable() {
+        playableState = true
+    }
+
     //init gameplay after shake
     fun gameInit(playOder: String) {
         when(playOder) {
             "first" -> {
-                txt_result.text = "You go first"
+                displayInfo("You go first")
                 gameMaster.rollDice()
                 takeFirstTurn()
                 //startGameButton.isEnabled = false
             }
 
             "second" -> {
-                txt_result.text = "You go second"
+                displayInfo("You go second")
                 gameMaster.rollDice() //roll from 0 to 4 aka 5 dice
                 passTurn()
                 //startGameButton.isEnabled = false
@@ -147,33 +153,12 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         }
     }
 
-    //reset playable
-    fun resetPlayable() {
-        playableState = true
-    }
+
 
     //display player dice
-    fun displayDice(diceArray: List<Int>) {
-        setDiceImage(dice_no1,diceArray[0])
-        setDiceImage(dice_no2,diceArray[1])
-        setDiceImage(dice_no3,diceArray[2])
-        setDiceImage(dice_no4,diceArray[3])
-        setDiceImage(dice_no5,diceArray[4])
 
-        saveToExternalStorage(diceArray)
-    }
 
-    private fun setDiceImage(imageView: ImageView, number: Int){
-        when (number) {
-            1 -> imageView.setImageResource(R.drawable.ic_dice_1)
-            2 -> imageView.setImageResource(R.drawable.ic_dice_2)
-            3 -> imageView.setImageResource(R.drawable.ic_dice_3)
-            4 -> imageView.setImageResource(R.drawable.ic_dice_4)
-            5 -> imageView.setImageResource(R.drawable.ic_dice_5)
-            else -> imageView.setImageResource(R.drawable.ic_dice_6)
-        }
-    }
-
+    // save to external storage
     fun saveToExternalStorage(diceArray: List<Int>) {
         if( diceArray.isNotEmpty() && Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             val inputText = diceArray.toString() + "\n"
@@ -187,7 +172,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //take your turn
     fun takeFirstTurn() {
-        txt_result.text = "Your go first"
+        displayInfo("Your go first")
         btn_bid.isEnabled = true
         totalSpinner.isEnabled = true
         typeSpinner.isEnabled = true
@@ -195,7 +180,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //take your turn
     fun takeTurn() {
-        txt_result.text = "Your turn"
+        displayInfo("Your go")
         btn_bid.isEnabled = true
         btn_call.isEnabled = true
         totalSpinner.isEnabled = true
@@ -204,7 +189,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //pass your turn
     fun passTurn(){
-        txt_result.text = "Opponent turn"
+        displayInfo("Opponent turn")
         btn_bid.isEnabled = false
         btn_call.isEnabled = false
         totalSpinner.isEnabled = false
@@ -213,22 +198,24 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //get opponent roll
     fun getOpponentGuessHistory(total: Int, dice: Int) {
-        opponentBid += "$total x $dice dice\n"
+        opponentBid = "$total x $dice dice\n"
+        displayBid("Opponent bids $opponentBid")
         totalBid = total
         typeBid = dice
         gameMaster.setCurrentBid(total,dice)
         println("------ current bid ------")
         println(gameMaster.currentBid)
-        //opponentGuess.text = opponentBid
         //setSpinnerChoice(total,dice)
         takeTurn()
     }
+
     // check illegal
     private fun checkIllegal(total: Int, dice: Int): Boolean {
         if(total < totalBid || dice < typeBid) return true
         if(total == totalBid && dice == typeBid) return true
         return false
     }
+
     //bid
     private fun bid() {
         val total = totalSpinner.selectedItem.toString()
@@ -239,14 +226,14 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         } else {
 
             bluetoothService.sendInfo("bid$gibberish$total$gibberish$type")
-            yourBid += total + " x " + type + "dice"+"\n"
-            //yourGuess.text = yourBid
+            yourBid = total + " x " + type + "dice"+"\n"
+            displayBid("You bids $yourBid")
             gameMaster.setCurrentBid(total.toInt(), type.toInt())
-            //setSpinnerChoice(total.toInt(), type.toInt())
             passTurn()
         }
 
     }
+
     //set choice
     fun setSpinnerChoice(total: Int, dice: Int) {
         totalList = if (total < 9) {
@@ -278,24 +265,76 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //display enemy roll
     fun displayEnemyRoll(diceArray: List<String>){
-        setDiceImage(dice_no6,diceArray[0].toInt())
-        setDiceImage(dice_no7,diceArray[1].toInt())
-        setDiceImage(dice_no8,diceArray[2].toInt())
-        setDiceImage(dice_no9,diceArray[3].toInt())
-        setDiceImage(dice_no10,diceArray[4].toInt())
+        when(diceArray.size) {
+            0 -> {
+                setDiceImage(dice_no6,7)
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
+            }
+
+            1 -> {
+                setDiceImage(dice_no6,diceArray[0].toInt())
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
+            }
+            2 -> {
+                setDiceImage(dice_no6,diceArray[0].toInt())
+                setDiceImage(dice_no7,diceArray[1].toInt())
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
+            }
+            3 -> {
+                setDiceImage(dice_no6,diceArray[0].toInt())
+                setDiceImage(dice_no7,diceArray[1].toInt())
+                setDiceImage(dice_no8,diceArray[2].toInt())
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
+            }
+            4 -> {
+                setDiceImage(dice_no6,diceArray[0].toInt())
+                setDiceImage(dice_no7,diceArray[1].toInt())
+                setDiceImage(dice_no8,diceArray[2].toInt())
+                setDiceImage(dice_no9,diceArray[3].toInt())
+                setDiceImage(dice_no10,7)
+            }
+            5 -> {
+                setDiceImage(dice_no6,diceArray[0].toInt())
+                setDiceImage(dice_no7,diceArray[1].toInt())
+                setDiceImage(dice_no8,diceArray[2].toInt())
+                setDiceImage(dice_no9,diceArray[3].toInt())
+                setDiceImage(dice_no10,diceArray[4].toInt())
+            }
+        }
     }
 
     //clear bid history
     fun clearGuessHistory(opponentDice: String) {
         val enemyDice = opponentDice.toInt()+1
-        val display = "enemy has $enemyDice dice"
+        displayBid("Enemy has $enemyDice")
         totalBid = 0
         typeBid = 0
-        //opponentGuess.text =""
         opponentBid = ""
         yourBid = ""
-        //yourGuess.text = ""
-        //enemyRoll.text = display
+    }
+
+    //display info
+    fun displayInfo(text: String) {
+        txt_result.text = text
+    }
+
+    //display info
+    fun displayBid(text: String) {
+        txt_bid_info.text = text
+    }
+
+    //display win lost
+    fun displayWin(win: String) {
+        txt_result.text = "You $win last round."
     }
 
     //go to result
@@ -307,10 +346,67 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         }
     }
 
-    //display win lost
-    fun displayWin(win: String) {
-        txt_result.text = win
+    fun displayDice(diceArray: List<Int>) {
+        when(diceArray.size) {
+            0 -> {
+                setDiceImage(dice_no1,7)
+                setDiceImage(dice_no2,7)
+                setDiceImage(dice_no3,7)
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
+
+            1 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,7)
+                setDiceImage(dice_no3,7)
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
+            2 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,7)
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
+            3 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
+            4 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,diceArray[3])
+                setDiceImage(dice_no5,7)
+            }
+            5 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,diceArray[3])
+                setDiceImage(dice_no5,diceArray[4])
+            }
+        }
+        saveToExternalStorage(diceArray)
     }
+
+    private fun setDiceImage(imageView: ImageView, number: Int){
+        when (number) {
+            1 -> imageView.setImageResource(R.drawable.ic_dice_1)
+            2 -> imageView.setImageResource(R.drawable.ic_dice_2)
+            3 -> imageView.setImageResource(R.drawable.ic_dice_3)
+            4 -> imageView.setImageResource(R.drawable.ic_dice_4)
+            5 -> imageView.setImageResource(R.drawable.ic_dice_5)
+            6 -> imageView.setImageResource(R.drawable.ic_dice_6)
+            else -> imageView.setImageResource(R.drawable.blackdice_background)
+        }
+    }
+
     private inner class GameMaster(val bluetoothService: MyBluetoothService, val playActivity: PlayActivity) {
         // Game Master class is to help control the flow of the game
         var numberOfDice = 4
@@ -345,7 +441,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                         playActivity.gameInit("second")
                         currentBidder = "enemy"
                     }
-                    else -> reroll()
+                    else -> reRoll()
                 }
             }
         }
@@ -356,8 +452,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             currentBid = arrayListOf(total, type)
         }
 
-        // reroll dice if two players roll the same value
-        fun reroll() {
+        // reRoll dice if two players roll the same value
+        fun reRoll() {
             opponentValue = -2
             initGame()
             decideTurn()
@@ -380,6 +476,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             }
             currentBidder = "enemy"
             sentInfo += "-!@#$%^)+_-&*--"
+            playActivity.displayInfo("You challenged enemy bid")
             bluetoothService.sendInfo(sentInfo)
         }
 
@@ -390,6 +487,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 sentInfo+= "$it-"
             }
             currentBidder = "you"
+            playActivity.displayInfo("Enemy challenged your bid")
             sentInfo += "-!@#$%^)+_-&*--"
             bluetoothService.sendInfo(sentInfo)
         }
@@ -410,8 +508,9 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             println(count)
             println(currentBid[0])
             println(currentBid[1])
+            playActivity.displayBid("Bid is ${currentBid[0]} x ${currentBid[1]} dice. There are $count x ${currentBid[1]} dice.")
             if(currentBidder == "you") {
-                lastRoundResult = if(count == currentBid[0] || count > currentBid[0]) {
+                lastRoundResult = if( count == currentBid[0] || count > currentBid[0]) {
                     println(1)
                     println("you win this round")
                     Toast.makeText(this@PlayActivity,"You win this \nStarting next round",Toast.LENGTH_LONG).show()
@@ -423,7 +522,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                     "lost"
                 }
             } else {
-                lastRoundResult = if(count == currentBid[0] || count > currentBid[0]) {
+                lastRoundResult = if( count == currentBid[0] || count > currentBid[0]) {
                     println(3)
                     println("you lose this round")
                     Toast.makeText(this@PlayActivity,"You lost this \nStarting next round",Toast.LENGTH_LONG).show()
@@ -437,6 +536,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             }
             playActivity.displayWin(lastRoundResult)
             playActivity.passTurn()
+            playActivity.resetPlayable()
+            //startNextRound()
             //playActivity.startGameButton.isEnabled = true
         }
 
@@ -448,6 +549,9 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             if(lastRoundResult == "win") {
                 enemyNumberOfDice--
                 playActivity.clearGuessHistory(enemyNumberOfDice.toString())
+                val enemyDisp = mutableListOf<String>()
+
+                playActivity.displayEnemyRoll(enemyDisp)
 
                 if(enemyNumberOfDice < 0) {
                     bluetoothService.stopConnect()
@@ -455,7 +559,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 } else {
                     rollDice()
                     playActivity.passTurn()
-                    playActivity.resetPlayable()
                 }
 
             } else {
@@ -468,13 +571,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 } else {
                     rollDice()
                     playActivity.takeFirstTurn()
-                    playActivity.resetPlayable()
                 }
-
             }
-
         }
-
     }
-
 }

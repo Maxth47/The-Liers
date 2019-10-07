@@ -50,17 +50,29 @@
                     android:id="@+id/dice_no10"
                     android:layout_margin="10dp"/>
             </LinearLayout>
+
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/txt_result"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:gravity="center"
                 android:text="You Win"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:gravity="center"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/txt_bid_info"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
                 android:layout_weight="1"
-                android:background="@color/colorWhite">
-            </TextView>
+                android:background="@color/colorWhite"
+                android:gravity="center"
+                android:text="You Win"
+                android:textSize="30sp"
+                android:textStyle="bold"></TextView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
