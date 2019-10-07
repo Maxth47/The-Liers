@@ -15,10 +15,6 @@ class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
-        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
-        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)
-        // init bluetooth
-        initBluetooth()
 
         val sharedPreference = SharedPreference(this)
         if (sharedPreference.getUsername() !== ""){
@@ -41,8 +37,6 @@ class StartActivity : AppCompatActivity() {
         btn_aboutUs.setOnClickListener {
             Toast.makeText(this, "Metropolia Developers: Thanh Le, Son Bui", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -65,23 +59,4 @@ class StartActivity : AppCompatActivity() {
         }
     }
 
-
-    // init bluetooth on from inside the app
-    private fun initBluetooth() {
-        // checking for bluetooth avail and turn on bluetooth if not on
-        if (BluetoothHandler.checkBluetoothAvail()) {
-            println("===============================")
-            println("bluetooth is available")
-            // activate bluetooth if bluetooth is not turned on
-            if(!BluetoothHandler.checkBluetoothEnabled()) {
-                println("bluetooth is not turned on")
-                turnBluetoothOn()
-            }
-        }
-    }
-    // go to intent to turn  bluetooth on
-    private fun turnBluetoothOn() {
-        val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
-    }
 }
