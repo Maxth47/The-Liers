@@ -10,26 +10,26 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LoseActivity : AppCompatActivity() {
+class WinActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lose)
+        setContentView(R.layout.activity_win)
 
         button.setOnClickListener {
             startActivity(Intent(this, MenuActivity::class.java))
         }
 
-        saveLoseResultToExternalStorage()
+        saveWinResultToExternalStorage()
     }
 
-    fun saveLoseResultToExternalStorage() {
+    fun saveWinResultToExternalStorage() {
         if( Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             var sharedPreference = SharedPreference(this)
             val userName = sharedPreference.getUsername()
             val opponentName = sharedPreference.getEnemyName()
             val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-            val inputText = "[MatchResult:] ${timeStamp} : ${userName} LOSE AGAINST ${opponentName}"
+            val inputText = "[MatchResult:] ${timeStamp} : ${userName} WIN AGAINST ${opponentName}"
             val filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
             val file = File(filePath, "History.txt")
             file.appendText(inputText)
@@ -37,4 +37,5 @@ class LoseActivity : AppCompatActivity() {
             Toast.makeText(this, "No dice saved", Toast.LENGTH_LONG).show()
         }
     }
+
 }
