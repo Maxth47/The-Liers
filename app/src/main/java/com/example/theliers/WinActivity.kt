@@ -29,7 +29,7 @@ class WinActivity : AppCompatActivity() {
             val userName = sharedPreference.getUsername()
             val opponentName = sharedPreference.getEnemyName()
             val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-            val inputText = "[MatchResult:] ${timeStamp} : ${userName} WIN AGAINST ${opponentName}"
+            val inputText = "[MatchResult:] $timeStamp : $userName WIN AGAINST $opponentName"
             val filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
             val file = File(filePath, "History.txt")
             file.appendText(inputText)
