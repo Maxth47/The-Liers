@@ -16,12 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/GameTheme">
-        <activity android:name=".LoseActivity"></activity>
-        <activity android:name=".WinActivity" />
-        <activity android:name=".ChooseActivity" />
-        <activity android:name=".HostActivity" />
-        <activity android:name=".PlayActivity" android:screenOrientation="landscape"/>
-        <activity android:name=".StartActivity" />
+        <activity android:name=".LoseActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".WinActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".ChooseActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".HostActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".PlayActivity"  android:screenOrientation="landscape"/>
+        <activity android:name=".StartActivity" android:screenOrientation="landscape"/>
         <activity
             android:name=".MenuActivity"
             android:screenOrientation="landscape"
