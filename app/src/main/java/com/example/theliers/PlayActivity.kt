@@ -102,7 +102,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         btn_bid.setOnClickListener {
             bid()
         }
-
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -226,7 +225,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         } else {
 
             bluetoothService.sendInfo("bid$gibberish$total$gibberish$type")
-            yourBid = total + " x " + type + "dice"+"\n"
+            yourBid = "$total x $type dice"
             displayBid("You bids $yourBid")
             gameMaster.setCurrentBid(total.toInt(), type.toInt())
             passTurn()
@@ -312,10 +311,41 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         }
     }
 
+    //display enemy number of dice
+    fun displayEnemyNumberOfDice(size: Int) {
+        when (size) {
+            1 -> {
+                setDiceImage(dice_no6,8)
+            }
+            2 -> {
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+            }
+            3 -> {
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+                setDiceImage(dice_no8,8)
+            }
+            4 -> {
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+                setDiceImage(dice_no8,8)
+                setDiceImage(dice_no9,8)
+            }
+            5 -> {
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+                setDiceImage(dice_no8,8)
+                setDiceImage(dice_no9,8)
+                setDiceImage(dice_no10,8)
+            }
+        }
+    }
+
     //clear bid history
     fun clearGuessHistory(opponentDice: String) {
         val enemyDice = opponentDice.toInt()+1
-        displayBid("Enemy has $enemyDice")
+        displayBid("Enemy has $enemyDice dice")
         totalBid = 0
         typeBid = 0
         opponentBid = ""
@@ -334,7 +364,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //display win lost
     fun displayWin(win: String) {
-        txt_result.text = "You $win last round."
+        txt_result.text = "You $win last round. Shake to go to next round."
     }
 
     //go to result
@@ -403,7 +433,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             4 -> imageView.setImageResource(R.drawable.ic_dice_4)
             5 -> imageView.setImageResource(R.drawable.ic_dice_5)
             6 -> imageView.setImageResource(R.drawable.ic_dice_6)
-            else -> imageView.setImageResource(R.drawable.blackdice_background)
+            7 -> imageView.setImageResource(R.drawable.blackdice_background)
+            8 -> imageView.setImageResource(R.drawable.question_background)
         }
     }
 
@@ -534,11 +565,9 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                     "win"
                 }
             }
-            playActivity.displayWin(lastRoundResult)
             playActivity.passTurn()
+            playActivity.displayWin(lastRoundResult)
             playActivity.resetPlayable()
-            //startNextRound()
-            //playActivity.startGameButton.isEnabled = true
         }
 
         //start next round
@@ -549,8 +578,9 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             if(lastRoundResult == "win") {
                 enemyNumberOfDice--
                 playActivity.clearGuessHistory(enemyNumberOfDice.toString())
-                val enemyDisp = mutableListOf<String>()
 
+                val enemyDisp = mutableListOf<String>()
+                playActivity.displayEnemyNumberOfDice(enemyNumberOfDice)
                 playActivity.displayEnemyRoll(enemyDisp)
 
                 if(enemyNumberOfDice < 0) {
@@ -564,7 +594,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             } else {
                 numberOfDice--
                 playActivity.clearGuessHistory(enemyNumberOfDice.toString())
-
+                val enemyDisp = mutableListOf<String>()
+                playActivity.displayEnemyRoll(enemyDisp)
                 if(numberOfDice < 0) {
                     bluetoothService.stopConnect()
                     playActivity.goToResult("lost")
