@@ -28,6 +28,10 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 if(order.size == 3) {
                     println(order)
                     when (order[0]) {
+                        "greet" -> {
+                            getOpponentName(order[1])
+                        }
+
                         "initGame" -> {
                             gameMaster.opponentValue = order[1].toInt()
                             gameMaster.decideTurn()
@@ -69,8 +73,13 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     var opponentBid = ""
     var yourBid = ""
 
+    //detect user shake to initiate game
     var shakeTurn = 0
     private var playableState = true
+
+    //player names
+    lateinit var userName: String
+    lateinit var enemyName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +111,10 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         btn_bid.setOnClickListener {
             bid()
         }
+
+        val sharedPreference = SharedPreference(this)
+        userName =  sharedPreference.getUsername()
+        bluetoothService.sendInfo("greet$gibberish"+userName+gibberish+"0")
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -128,6 +141,13 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         //txtView.setText(shakeTurn.toString()+ran)
     }
 
+    // get opponent name
+    fun getOpponentName(name: String) {
+
+        val sharedPreference = SharedPreference(this)
+        sharedPreference.setEnemyname(name)
+    }
+
     //reset playable
     fun resetPlayable() {
         playableState = true
@@ -151,11 +171,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             }
         }
     }
-
-
-
-    //display player dice
-
 
     // save to external storage
     fun saveToExternalStorage(diceArray: List<Int>) {
@@ -433,8 +448,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             4 -> imageView.setImageResource(R.drawable.ic_dice_4)
             5 -> imageView.setImageResource(R.drawable.ic_dice_5)
             6 -> imageView.setImageResource(R.drawable.ic_dice_6)
-            7 -> imageView.setImageResource(R.drawable.blackdice_background)
-            8 -> imageView.setImageResource(R.drawable.question_background)
+            7 -> imageView.setImageResource(R.drawable.ic_dice_)
+            8 -> imageView.setImageResource(R.drawable.ic_dice_)
         }
     }
 

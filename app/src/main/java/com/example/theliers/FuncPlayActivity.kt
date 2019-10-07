@@ -26,6 +26,7 @@ class FuncPlayActivity : AppCompatActivity()  {
                 if(order.size == 3) {
                     println(order)
                     when (order[0]) {
+
                         "initGame" -> {
                             gameMaster.opponentValue = order[1].toInt()
                             gameMaster.decideTurn()
@@ -410,7 +411,6 @@ class FuncPlayActivity : AppCompatActivity()  {
                     rollDice()
                     funcPlayActivity.takeFirstTurn()
                 }
-
             }
 
         }
