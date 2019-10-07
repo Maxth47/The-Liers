@@ -385,7 +385,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     //go to result
     fun goToResult(win: String){
         if(win == "win") {
-            startActivity(Intent(this, winActivity::class.java))
+            startActivity(Intent(this, WinActivity::class.java))
         } else {
             startActivity(Intent(this, LoseActivity::class.java))
         }
