@@ -87,11 +87,11 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         txt_result.text = getString(R.string.shake_start)
         setUpSpinner()
 
-        dice_no6.setImageResource(R.drawable.ic_dice_)
-        dice_no7.setImageResource(R.drawable.ic_dice_)
-        dice_no8.setImageResource(R.drawable.ic_dice_)
-        dice_no9.setImageResource(R.drawable.ic_dice_)
-        dice_no10.setImageResource(R.drawable.ic_dice_)
+        dice_no6.setImageResource(R.drawable.ic_information)
+        dice_no7.setImageResource(R.drawable.ic_information)
+        dice_no8.setImageResource(R.drawable.ic_information)
+        dice_no9.setImageResource(R.drawable.ic_information)
+        dice_no10.setImageResource(R.drawable.ic_information)
         displayBid("")
 
         if (playableState){
@@ -281,40 +281,40 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     fun displayEnemyRoll(diceArray: List<String>){
         when(diceArray.size) {
             0 -> {
-                setDiceImage(dice_no6,7)
-                setDiceImage(dice_no7,7)
-                setDiceImage(dice_no8,7)
-                setDiceImage(dice_no9,7)
-                setDiceImage(dice_no10,7)
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+                setDiceImage(dice_no8,8)
+                setDiceImage(dice_no9,8)
+                setDiceImage(dice_no10,8)
             }
 
             1 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
-                setDiceImage(dice_no7,7)
-                setDiceImage(dice_no8,7)
-                setDiceImage(dice_no9,7)
-                setDiceImage(dice_no10,7)
+                setDiceImage(dice_no7,8)
+                setDiceImage(dice_no8,8)
+                setDiceImage(dice_no9,8)
+                setDiceImage(dice_no10,8)
             }
             2 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
                 setDiceImage(dice_no7,diceArray[1].toInt())
-                setDiceImage(dice_no8,7)
-                setDiceImage(dice_no9,7)
-                setDiceImage(dice_no10,7)
+                setDiceImage(dice_no8,8)
+                setDiceImage(dice_no9,8)
+                setDiceImage(dice_no10,8)
             }
             3 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
                 setDiceImage(dice_no7,diceArray[1].toInt())
                 setDiceImage(dice_no8,diceArray[2].toInt())
-                setDiceImage(dice_no9,7)
-                setDiceImage(dice_no10,7)
+                setDiceImage(dice_no9,8)
+                setDiceImage(dice_no10,8)
             }
             4 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
                 setDiceImage(dice_no7,diceArray[1].toInt())
                 setDiceImage(dice_no8,diceArray[2].toInt())
                 setDiceImage(dice_no9,diceArray[3].toInt())
-                setDiceImage(dice_no10,7)
+                setDiceImage(dice_no10,8)
             }
             5 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
@@ -330,30 +330,102 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     fun displayEnemyNumberOfDice(size: Int) {
         when (size) {
             1 -> {
-                setDiceImage(dice_no6,8)
-            }
-            2 -> {
-                setDiceImage(dice_no6,8)
-                setDiceImage(dice_no7,8)
-            }
-            3 -> {
-                setDiceImage(dice_no6,8)
-                setDiceImage(dice_no7,8)
-                setDiceImage(dice_no8,8)
-            }
-            4 -> {
-                setDiceImage(dice_no6,8)
-                setDiceImage(dice_no7,8)
-                setDiceImage(dice_no8,8)
-                setDiceImage(dice_no9,8)
-            }
-            5 -> {
-                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no6,7)
                 setDiceImage(dice_no7,8)
                 setDiceImage(dice_no8,8)
                 setDiceImage(dice_no9,8)
                 setDiceImage(dice_no10,8)
             }
+            2 -> {
+                setDiceImage(dice_no6,7)
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,8)
+                setDiceImage(dice_no9,8)
+                setDiceImage(dice_no10,8)
+            }
+            3 -> {
+                setDiceImage(dice_no6,7)
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,8)
+                setDiceImage(dice_no10,8)
+            }
+            4 -> {
+                setDiceImage(dice_no6,7)
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,8)
+            }
+            5 -> {
+                setDiceImage(dice_no6,7)
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
+            }
+        }
+    }
+
+    fun displayDice(diceArray: List<Int>) {
+        when(diceArray.size) {
+            0 -> {
+                setDiceImage(dice_no1,8)
+                setDiceImage(dice_no2,8)
+                setDiceImage(dice_no3,8)
+                setDiceImage(dice_no4,8)
+                setDiceImage(dice_no5,8)
+            }
+
+            1 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,8)
+                setDiceImage(dice_no3,8)
+                setDiceImage(dice_no4,8)
+                setDiceImage(dice_no5,8)
+            }
+            2 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,8)
+                setDiceImage(dice_no4,8)
+                setDiceImage(dice_no5,8)
+            }
+            3 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,8)
+                setDiceImage(dice_no5,8)
+            }
+            4 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,diceArray[3])
+                setDiceImage(dice_no5,8)
+            }
+            5 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,diceArray[3])
+                setDiceImage(dice_no5,diceArray[4])
+            }
+        }
+        saveToExternalStorage(diceArray)
+    }
+
+    private fun setDiceImage(imageView: ImageView, number: Int){
+        when (number) {
+            1 -> imageView.setImageResource(R.drawable.ic_dice_1)
+            2 -> imageView.setImageResource(R.drawable.ic_dice_2)
+            3 -> imageView.setImageResource(R.drawable.ic_dice_3)
+            4 -> imageView.setImageResource(R.drawable.ic_dice_4)
+            5 -> imageView.setImageResource(R.drawable.ic_dice_5)
+            6 -> imageView.setImageResource(R.drawable.ic_dice_6)
+            7 -> imageView.setImageResource(R.drawable.ic_information)
+            8 -> imageView.setImageDrawable(null)
         }
     }
 
@@ -391,67 +463,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         }
     }
 
-    fun displayDice(diceArray: List<Int>) {
-        when(diceArray.size) {
-            0 -> {
-                setDiceImage(dice_no1,7)
-                setDiceImage(dice_no2,7)
-                setDiceImage(dice_no3,7)
-                setDiceImage(dice_no4,7)
-                setDiceImage(dice_no5,7)
-            }
 
-            1 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,7)
-                setDiceImage(dice_no3,7)
-                setDiceImage(dice_no4,7)
-                setDiceImage(dice_no5,7)
-            }
-            2 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,7)
-                setDiceImage(dice_no4,7)
-                setDiceImage(dice_no5,7)
-            }
-            3 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,diceArray[2])
-                setDiceImage(dice_no4,7)
-                setDiceImage(dice_no5,7)
-            }
-            4 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,diceArray[2])
-                setDiceImage(dice_no4,diceArray[3])
-                setDiceImage(dice_no5,7)
-            }
-            5 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,diceArray[2])
-                setDiceImage(dice_no4,diceArray[3])
-                setDiceImage(dice_no5,diceArray[4])
-            }
-        }
-        saveToExternalStorage(diceArray)
-    }
-
-    private fun setDiceImage(imageView: ImageView, number: Int){
-        when (number) {
-            1 -> imageView.setImageResource(R.drawable.ic_dice_1)
-            2 -> imageView.setImageResource(R.drawable.ic_dice_2)
-            3 -> imageView.setImageResource(R.drawable.ic_dice_3)
-            4 -> imageView.setImageResource(R.drawable.ic_dice_4)
-            5 -> imageView.setImageResource(R.drawable.ic_dice_5)
-            6 -> imageView.setImageResource(R.drawable.ic_dice_6)
-            7 -> imageView.setImageResource(R.drawable.ic_dice_)
-            8 -> imageView.setImageResource(R.drawable.ic_dice_)
-        }
-    }
 
     private inner class GameMaster(val bluetoothService: MyBluetoothService, val playActivity: PlayActivity) {
         // Game Master class is to help control the flow of the game

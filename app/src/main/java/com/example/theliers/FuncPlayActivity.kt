@@ -103,7 +103,6 @@ class FuncPlayActivity : AppCompatActivity()  {
         callButton.setOnClickListener {
             gameMaster.call()
         }
-
     }
 
     //init gameplay
@@ -192,26 +191,6 @@ class FuncPlayActivity : AppCompatActivity()  {
             passTurn()
         }
 
-    }
-    //set choice
-    fun setSpinnerChoice(total: Int, dice: Int) {
-        totalList = if (total < 9) {
-            (total+1..10).toList()
-        } else {
-            listOf(10)
-        }
-        println("total list value")
-        println(totalList)
-
-        dicelist = if (dice < 5) {
-            (dice+1..6).toList()
-        } else {
-            listOf(6)
-        }
-        println("total list value")
-        println(totalList)
-        totalSpinner.adapter
-        setUpSpinner()
     }
 
     //set up spinner
