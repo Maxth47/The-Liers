@@ -132,13 +132,10 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 shakeTurn++
                 playableState = false
             } else {
-                //val display =  gameMaster.enemyNumberOfDice + 1
-                //enemyRoll.text = display.toString()
                 gameMaster.startNextRound()
                 playableState = false
             }
         }
-        //txtView.setText(shakeTurn.toString()+ran)
     }
 
     // get opponent name
@@ -413,7 +410,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 setDiceImage(dice_no5,diceArray[4])
             }
         }
-        saveToExternalStorage(diceArray)
+        //saveToExternalStorage(diceArray)
     }
 
     private fun setDiceImage(imageView: ImageView, number: Int){

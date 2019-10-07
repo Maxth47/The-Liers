@@ -28,8 +28,8 @@ class LoseActivity : AppCompatActivity() {
             var sharedPreference = SharedPreference(this)
             val userName = sharedPreference.getUsername()
             val opponentName = sharedPreference.getEnemyName()
-            val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-            val inputText = "[MatchResult:] ${timeStamp} : ${userName} LOSE AGAINST ${opponentName}"
+            val timeStamp: String = SimpleDateFormat("dd.MM.yyyy HH:mm").format(Date())
+            val inputText = "[MatchResult:] ${timeStamp} : ${userName} LOSE AGAINST ${opponentName} \n"
             val filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
             val file = File(filePath, "History.txt")
             file.appendText(inputText)
