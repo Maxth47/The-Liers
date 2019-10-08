@@ -30,8 +30,9 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:background="@color/colorOrange"
-        android:textSize="10sp"
+        android:textSize="20sp"
         android:ellipsize="marquee"
+        android:scrollbars="vertical"
         android:id="@+id/txt_history"/>
 
     <TextView
@@ -40,7 +41,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/colorYellow"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:text="113 : Name : 76%"/>
 </LinearLayout>
