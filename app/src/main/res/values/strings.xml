@@ -21,4 +21,15 @@
         <item>5</item>
         <item>6</item>
     </string-array>
+    <string name="history_analysis">Player : %1$s : Matches : %2$d : Winning Ratio : %3$d\%%</string>
+    <string name="step_title">Step %1$s : %2$s</string>
+    <string name="step_content">%1$s. \n %2$s</string>
+    <string name="round_result_msg">You %1$s last round. Shake to go to next round.</string>
+    <string name="history_empty">History is empty ...</string>
+    <string name="enemy_5dice">Enemy has 5 dice</string>
+    <string name="you_first">You go first</string>
+    <string name="you_second">You go second</string>
+    <string name="your_turn">Your Turn</string>
+    <string name="opponent_turn">Opponent Turn</string>
+
 </resources>

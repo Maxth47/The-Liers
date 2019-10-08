@@ -1,14 +1,12 @@
 package com.example.theliers
 
 import android.app.Activity
-import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.theliers.bluetooth.BluetoothHandler
 import kotlinx.android.synthetic.main.activity_start.*
-import kotlinx.android.synthetic.main.fragment_history.*
 
 class StartActivity : AppCompatActivity() {
 
@@ -24,8 +22,8 @@ class StartActivity : AppCompatActivity() {
 
         btn_start.setOnClickListener {
             if (edt_name.text.isNotEmpty()){
-                val sharedPreference = SharedPreference(this)
-                sharedPreference.setUsername(edt_name.text.toString())
+                val sharedPreferenceX = SharedPreference(this)
+                sharedPreferenceX.setUsername(edt_name.text.toString())
                 val intent = Intent(this, MenuActivity::class.java)
                 startActivity(intent)
             } else {

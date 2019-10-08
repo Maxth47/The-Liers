@@ -14,7 +14,6 @@ import com.example.theliers.bluetooth.BluetoothHandler
 import com.example.theliers.bluetooth.MyBluetoothService
 import com.squareup.seismic.ShakeDetector
 import kotlinx.android.synthetic.main.activity_play.*
-import java.io.File
 
 class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.OnItemSelectedListener {
 
@@ -62,24 +61,23 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     private val gameMaster = GameMaster(bluetoothService, this)
 
     //array list of int for spinner
-    var totalList = listOf(1,2,3,4,5,6,7,8,9,10)
-    var dicelist = listOf(1,2,3,4,5,6)
+    private var totalList = listOf(1,2,3,4,5,6,7,8,9,10)
+    private var dicelist = listOf(1,2,3,4,5,6)
 
     //int to remember last opponent bid
-    var totalBid = 0
-    var typeBid = 0
+    private var totalBid = 0
+    private var typeBid = 0
 
     //string to remember players choice
-    var opponentBid = ""
-    var yourBid = ""
+    private var opponentBid = ""
+    private var yourBid = ""
 
     //detect user shake to initiate game
-    var shakeTurn = 0
+    private var shakeTurn = 0
     private var playableState = true
 
     //player names
-    lateinit var userName: String
-    lateinit var enemyName: String
+    private lateinit var userName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,13 +125,13 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     // listen to shake sensors
     override fun hearShake() {
         if (playableState) {
-            if (shakeTurn==0) {
+            playableState = if (shakeTurn==0) {
                 gameMaster.initGame()
                 shakeTurn++
-                playableState = false
+                false
             } else {
                 gameMaster.startNextRound()
-                playableState = false
+                false
             }
         }
     }
@@ -166,18 +164,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 passTurn()
                 //startGameButton.isEnabled = false
             }
-        }
-    }
-
-    // save to external storage
-    fun saveToExternalStorage(diceArray: List<Int>) {
-        if( diceArray.isNotEmpty() && Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            val inputText = diceArray.toString() + "\n"
-            val filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            val file = File(filePath, "History.txt")
-            file.appendText(inputText)
-        } else {
-            Toast.makeText(this, "No dice saved", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -243,26 +229,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             passTurn()
         }
 
-    }
-
-    //set choice
-    fun setSpinnerChoice(total: Int, dice: Int) {
-        totalList = if (total < 9) {
-            (total+1..10).toList()
-        } else {
-            listOf(10)
-        }
-        println("total list value")
-        println(totalList)
-
-        dicelist = if (dice < 5) {
-            (dice+1..6).toList()
-        } else {
-            listOf(6)
-        }
-        println("total list value")
-        println(totalList)
-        totalSpinner.adapter
     }
 
     //set up spinner
@@ -376,7 +342,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //display win lost
     fun displayWin(win: String) {
-        txt_result.text = "You $win last round. Shake to go to next round."
+        txt_result.text = getString(R.string.round_result_msg, win)
     }
 
     //go to result

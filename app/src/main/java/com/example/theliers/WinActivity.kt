@@ -1,5 +1,6 @@
 package com.example.theliers
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,13 +24,14 @@ class WinActivity : AppCompatActivity() {
         saveWinResultToExternalStorage()
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun saveWinResultToExternalStorage() {
         if( Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            var sharedPreference = SharedPreference(this)
+            val sharedPreference = SharedPreference(this)
             val userName = sharedPreference.getUsername()
             val opponentName = sharedPreference.getEnemyName()
             val timeStamp: String = SimpleDateFormat("dd.MM.yyyy HH:mm").format(Date())
-            val inputText = "[MatchResult:] ${timeStamp} : ${userName} WIN AGAINST ${opponentName} \n"
+            val inputText = "[MatchResult:] $timeStamp : $userName WIN AGAINST $opponentName \n"
             val filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
             val file = File(filePath, "History.txt")
             file.appendText(inputText)
