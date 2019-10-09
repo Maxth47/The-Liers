@@ -25,11 +25,33 @@
     <string name="step_title">Step %1$s : %2$s</string>
     <string name="step_content">%1$s. \n %2$s</string>
     <string name="round_result_msg">You %1$s last round. Shake to go to next round.</string>
-    <string name="history_empty">History is empty ...</string>
+    <string name="history_empty">History is empty.</string>
     <string name="enemy_5dice">Enemy has 5 dice</string>
     <string name="you_first">You go first</string>
     <string name="you_second">You go second</string>
-    <string name="your_turn">Your Turn</string>
+    <string name="quit">Quit</string>
+    <string name="call">Call</string>
+    <string name="bid">Bid</string>
+    <string name="cancel">Cancel</string>
+    <string name="dice">Dice</string>
+    <string name="number_of_dice">N</string>
+    <string name="kind_of_dice">X</string>
     <string name="opponent_turn">Opponent Turn</string>
-
+    <string name="go_back">Go Back</string>
+    <string name="reset">Reset</string>
+    <string name="new_game">New Game</string>
+    <string name="history">History</string>
+    <string name="start">Start</string>
+    <string name="about_us">About Us</string>
+    <string name="you_win">You Win</string>
+    <string name="you_lose">You Lose</string>
+    <string name="name">Name</string>
+    <string name="host">Host</string>
+    <string name="search">Seach</string>
+    <string name="your_turn">Your Turn</string>
+    <string name="rules">Rules</string>
+    <string name="go_left">Go Left</string>
+    <string name="go_right">Go Right</string>
+    <string name="how_to_play">How To Play ?</string>
+    <string name="rule_img">Rule Images</string>
 </resources>

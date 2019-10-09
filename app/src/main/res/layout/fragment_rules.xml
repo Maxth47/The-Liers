@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -10,16 +11,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Go back"
-            android:id="@+id/btn_goBackFromRules"
-            android:layout_alignParentLeft="true"/>
+            android:text="@string/go_back"
+            android:id="@+id/btn_goBackFromRules" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="40sp"
             android:gravity="center"
-            android:text="How to play?"/>
+            android:text="@string/how_to_play"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,38 +34,37 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:textSize="20sp"
-                android:id="@+id/txt_stepTitle"
-                android:text="title"/>
+                android:id="@+id/txt_stepTitle"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
-                android:textSize="15dp"
-                android:id="@+id/txt_stepContent"
-                android:text="content"/>
+                android:textSize="15sp"
+                android:id="@+id/txt_stepContent"/>
             <ImageView
                 android:padding="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="7"
-                android:id="@+id/img_stepImage"/>
+                android:id="@+id/img_stepImage"
+                android:contentDescription="@string/rule_img" />
         </LinearLayout>
 
-
         <Button
+            android:id="@+id/btn_leftArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_leftArrow"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:text="go left"/>
+            android:text="@string/go_left" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_rightArrow"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:text="go right"/>
+            android:text="@string/go_right"
+            tools:ignore="RelativeOverlap" />
     </RelativeLayout>
 </LinearLayout>
