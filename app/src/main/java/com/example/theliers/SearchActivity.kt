@@ -33,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
         }
         //------------------------------------------
         //start discovery
-        BluetoothHandler.startBluetoothDiscovery()
+
         // register this activity as receiver when discovery
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
@@ -41,8 +41,6 @@ class SearchActivity : AppCompatActivity() {
         registerReceiver(receiver, filter)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = BluetoothItemViewHolder.ViewAdapter(this)
-        recyclerView.adapter!!.notifyDataSetChanged()
-
     }
 
 
@@ -74,6 +72,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         // Don't forget to unregister the ACTION_FOUND receiver.
+        BluetoothHandler.cancelBluetoothDiscovery()
         unregisterReceiver(receiver)
     }
 

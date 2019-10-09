@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MenuActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/dice_screen_horizontal_pixel">
 
     <FrameLayout
         android:id="@+id/fragment"
-        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     </LinearLayout>

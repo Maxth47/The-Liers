@@ -2,52 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/dice_screen_bw">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorYellow">
+        android:layout_weight="1">
+
         <Button
+            android:id="@+id/btn_goBackFromRules"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/go_back"
-            android:id="@+id/btn_goBackFromRules" />
+            android:elevation="5dp"
+            android:fontFamily="@font/press_start_2p"
+            android:text="@string/go_back" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="40sp"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/press_start_2p"
             android:gravity="center"
-            android:text="@string/how_to_play"/>
+            android:text="@string/how_to_play"
+            android:textColor="@color/colorOrange"
+            android:textSize="28dp"
+            android:textStyle="bold" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@color/colorWhite"
-            android:orientation="vertical"
             android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:id="@+id/txt_stepTitle"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                android:textSize="15sp"
-                android:id="@+id/txt_stepContent"/>
+
             <ImageView
-                android:padding="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="7"
                 android:id="@+id/img_stepImage"
-                android:contentDescription="@string/rule_img" />
+                android:layout_width="409dp"
+                android:layout_height="194dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/rule_img"
+                android:padding="2dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_stepTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorPrimary"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/press_start_2p"
+                    android:padding="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txt_stepContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="@color/colorPrimary"
+                    android:fontFamily="@font/press_start_2p"
+                    android:padding="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="12sp"
+                    android:elevation="5dp"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <Button
@@ -56,14 +86,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
+            android:elevation="5dp"
+            android:fontFamily="@font/press_start_2p"
             android:text="@string/go_left" />
 
         <Button
+            android:id="@+id/btn_rightArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_rightArrow"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:elevation="5dp"
+            android:fontFamily="@font/press_start_2p"
             android:text="@string/go_right"
             tools:ignore="RelativeOverlap" />
     </RelativeLayout>

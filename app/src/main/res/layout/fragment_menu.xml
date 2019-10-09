@@ -1,50 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="64dp"
-    android:baselineAligned="false">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_newGame"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/colorRed"
-                android:text="@string/new_game"
-                android:textSize="30sp"/>
-            <Button
-                android:id="@+id/btn_history"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/colorPrimary"
-                android:text="@string/history"
-                android:textSize="30sp"/>
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:baselineAligned="false"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="548dp"
+        android:layout_height="98dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="12sp"
         android:layout_weight="1"
-        android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_rules"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/colorYellow"
-                android:text="@string/rules"
-                android:textSize="30sp"/>
-            <Button
-                android:id="@+id/btn_reset"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/colorAccent"
-                android:text="@string/reset"
-                android:textSize="30sp"/>
+        android:elegantTextHeight="true"
+        android:fontFamily="@font/press_start_2p"
+        android:gravity="bottom"
+        android:lineSpacingExtra="8sp"
+        android:text="@string/title"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        />
+
+    <LinearLayout
+        android:layout_width="555dp"
+        android:layout_height="36dp"
+        android:layout_weight="0.6"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_reset"
+            android:layout_width="185dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:text="@string/reset"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/btn_history"
+            android:layout_width="185dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:text="@string/history"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/btn_rules"
+            android:layout_width="185dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:text="@string/rules"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textSize="20sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="560dp"
+        android:layout_height="17dp"
+        android:layout_weight="1.4"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_newGame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:elevation="10dp"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:text="@string/new_game"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
 </LinearLayout>

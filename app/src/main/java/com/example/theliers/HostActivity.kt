@@ -19,10 +19,13 @@ class HostActivity : AppCompatActivity() {
 
         val  acceptThread = AcceptThread(this)
         acceptThread.start()
-        requestDiscoverable()
         cancelButton.setOnClickListener {
             acceptThread.cancel()
             finish()
+        }
+
+        hostButton.setOnClickListener {
+            requestDiscoverable()
         }
     }
 

@@ -3,49 +3,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/dice_screen_horizontal_pixel"
     android:orientation="vertical"
-    tools:context=".StartActivity"
-    android:background="@color/colorYellow">
+    tools:context=".StartActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
-        android:orientation="vertical"
         android:gravity="center"
-        >
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:text="@string/about"
+            android:textColor="@color/colorYellow"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="261dp"
+            android:layout_height="112dp"
+            android:elegantTextHeight="true"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:lineSpacingExtra="8sp"
+            android:text="@string/title"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
         <EditText
             android:id="@+id/edt_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginTop="16dp"
             android:background="@color/colorWhite"
             android:ellipsize="end"
             android:hint="@string/name"
+            android:importantForAutofill="no"
             android:inputType="text"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:textSize="40sp"
-            android:importantForAutofill="no" />
+            />
 
         <Button
             android:id="@+id/btn_start"
-            android:layout_width="150dp"
-            android:background="@color/colorPrimary"
+            android:layout_width="198dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            android:fontFamily="@font/press_start_2p"
+            android:shadowRadius="0.2"
             android:text="@string/start"
             android:textSize="18sp" />
+
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <Button
             android:id="@+id/btn_aboutUs"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
             android:background="?android:attr/selectableItemBackground"
-            android:text="@string/about_us"/>
+            android:text="@string/about_us"
+            android:textColor="@color/colorYellow"
+            android:textSize="12sp"
+            android:textStyle="italic" />
     </RelativeLayout>
 </LinearLayout>

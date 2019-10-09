@@ -47,11 +47,16 @@
     <string name="you_lose">You Lose</string>
     <string name="name">Name</string>
     <string name="host">Host</string>
-    <string name="search">Seach</string>
+    <string name="search">Search</string>
     <string name="your_turn">Your Turn</string>
     <string name="rules">Rules</string>
-    <string name="go_left">Go Left</string>
-    <string name="go_right">Go Right</string>
+    <string name="go_left">Back</string>
+    <string name="go_right">Next</string>
     <string name="how_to_play">How To Play ?</string>
     <string name="rule_img">Rule Images</string>
+    <string name="title">LIARS GAME</string>
+    <string name="about">a game by liars team</string>
+    <string name="choose_activity_guide">Host and Wait for other players to connect OR Search and look for other players.</string>
+    <string name="SearchHelp">Find Your Opponent</string>
+    <string name="start_host">Start Host</string>
 </resources>

@@ -6,13 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ChooseActivity">
+    tools:context=".ChooseActivity"
+    android:background="@drawable/dice_screen_horizontal_pixel">
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:fontFamily="@font/press_start_2p"
+        android:text="@string/choose_activity_guide"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/cancelSearchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/host"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cancelSearchButton" />
+
 </LinearLayout>
