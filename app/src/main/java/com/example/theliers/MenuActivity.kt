@@ -12,7 +12,7 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-        supportFragmentManager.beginTransaction().replace(R.id.fragment, Fragment_Menu()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment, FragmentMenu()).commit()
 
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),1)
         requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),1)

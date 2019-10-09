@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="132dp"
         android:layout_marginTop="32dp"
-        android:text="Play Activity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +21,6 @@
         android:layout_height="198dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="60dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
 
@@ -32,7 +30,6 @@
         android:layout_height="199dp"
         android:layout_marginStart="208dp"
         android:layout_marginTop="60dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
 
@@ -42,7 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="132dp"
         android:layout_marginTop="32dp"
-        android:text="Play Activity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="136dp"
-        android:text="Start"
+        android:text="@string/start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/play_text" />
 
@@ -62,7 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="96dp"
-        android:text="opponent roll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,7 +67,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="132dp"
-        android:text="your roll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,7 +76,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="44dp"
-        android:text="unknown"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/play_text" />
 
@@ -92,7 +85,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="84dp"
-        android:text="unknown"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/play_text" />
 
@@ -102,7 +94,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="31dp"
-        android:text="Opponent Guess"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
 
@@ -112,7 +103,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="31dp"
-        android:text="Opponent Guess"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
 
@@ -122,7 +112,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="208dp"
         android:layout_marginTop="28dp"
-        android:text="Your Guess"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
 
@@ -132,7 +121,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="60dp"
-        android:text="Turn View"
         app:layout_constraintStart_toEndOf="@+id/startGameButton"
         app:layout_constraintTop_toBottomOf="@+id/yourRoll" />
 
@@ -160,7 +148,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="180dp"
         android:layout_marginTop="12dp"
-        android:text="Guess"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/totalSpinner" />
 
@@ -170,7 +157,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="284dp"
         android:layout_marginTop="12dp"
-        android:text="Call"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/totalSpinner" />
 

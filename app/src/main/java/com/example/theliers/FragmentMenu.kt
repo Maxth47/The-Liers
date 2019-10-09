@@ -8,12 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.activity_start.*
 
 import kotlinx.android.synthetic.main.fragment_menu.*
 import java.io.File
 
-class Fragment_Menu: Fragment() {
+class FragmentMenu: Fragment() {
 
 
     override fun onCreateView(
@@ -36,21 +35,21 @@ class Fragment_Menu: Fragment() {
         }
 
         btn_history.setOnClickListener {
-            var fr = getFragmentManager()?.beginTransaction()
-            fr?.replace(R.id.fragment, Fragment_History())
+            val fr = fragmentManager?.beginTransaction()
+            fr?.replace(R.id.fragment, FragmentHistory())
             fr?.commit()
         }
 
         btn_rules.setOnClickListener {
-            var fr = getFragmentManager()?.beginTransaction()
-            fr?.replace(R.id.fragment, Fragment_Rules())
+            val fr = fragmentManager?.beginTransaction()
+            fr?.replace(R.id.fragment, FragmentRules())
             fr?.commit()
         }
 
         btn_reset.setOnClickListener {
 
-            val sharedPreference = SharedPreference(this.requireActivity())
-            sharedPreference.setUsername("")
+            val sharedPreferenceX = SharedPreference(this.requireActivity())
+            sharedPreferenceX.setUsername("")
 
             val filePath = context?.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
             val file = File(filePath, "History.txt")

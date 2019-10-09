@@ -14,7 +14,6 @@ import com.example.theliers.bluetooth.BluetoothHandler
 import com.example.theliers.bluetooth.MyBluetoothService
 import com.squareup.seismic.ShakeDetector
 import kotlinx.android.synthetic.main.activity_play.*
-import java.io.File
 
 class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.OnItemSelectedListener {
 
@@ -62,24 +61,23 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     private val gameMaster = GameMaster(bluetoothService, this)
 
     //array list of int for spinner
-    var totalList = listOf(1,2,3,4,5,6,7,8,9,10)
-    var dicelist = listOf(1,2,3,4,5,6)
+    private var totalList = listOf(1,2,3,4,5,6,7,8,9,10)
+    private var dicelist = listOf(1,2,3,4,5,6)
 
     //int to remember last opponent bid
-    var totalBid = 0
-    var typeBid = 0
+    private var totalBid = 0
+    private var typeBid = 0
 
     //string to remember players choice
-    var opponentBid = ""
-    var yourBid = ""
+    private var opponentBid = ""
+    private var yourBid = ""
 
     //detect user shake to initiate game
-    var shakeTurn = 0
+    private var shakeTurn = 0
     private var playableState = true
 
     //player names
-    lateinit var userName: String
-    lateinit var enemyName: String
+    private lateinit var userName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,11 +85,11 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         txt_result.text = getString(R.string.shake_start)
         setUpSpinner()
 
-        dice_no6.setImageResource(R.drawable.ic_information)
-        dice_no7.setImageResource(R.drawable.ic_information)
-        dice_no8.setImageResource(R.drawable.ic_information)
-        dice_no9.setImageResource(R.drawable.ic_information)
-        dice_no10.setImageResource(R.drawable.ic_information)
+        dice_no6.setImageResource(R.drawable.ic_dice_)
+        dice_no7.setImageResource(R.drawable.ic_dice_)
+        dice_no8.setImageResource(R.drawable.ic_dice_)
+        dice_no9.setImageResource(R.drawable.ic_dice_)
+        dice_no10.setImageResource(R.drawable.ic_dice_)
         displayBid("")
 
         if (playableState){
@@ -127,13 +125,13 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     // listen to shake sensors
     override fun hearShake() {
         if (playableState) {
-            if (shakeTurn==0) {
+            playableState = if (shakeTurn==0) {
                 gameMaster.initGame()
                 shakeTurn++
-                playableState = false
+                false
             } else {
                 gameMaster.startNextRound()
-                playableState = false
+                false
             }
         }
     }
@@ -166,18 +164,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                 passTurn()
                 //startGameButton.isEnabled = false
             }
-        }
-    }
-
-    // save to external storage
-    fun saveToExternalStorage(diceArray: List<Int>) {
-        if( diceArray.isNotEmpty() && Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-            val inputText = diceArray.toString() + "\n"
-            val filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            val file = File(filePath, "History.txt")
-            file.appendText(inputText)
-        } else {
-            Toast.makeText(this, "No dice saved", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -245,26 +231,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     }
 
-    //set choice
-    fun setSpinnerChoice(total: Int, dice: Int) {
-        totalList = if (total < 9) {
-            (total+1..10).toList()
-        } else {
-            listOf(10)
-        }
-        println("total list value")
-        println(totalList)
-
-        dicelist = if (dice < 5) {
-            (dice+1..6).toList()
-        } else {
-            listOf(6)
-        }
-        println("total list value")
-        println(totalList)
-        totalSpinner.adapter
-    }
-
     //set up spinner
     private fun setUpSpinner() {
         //set up total spinner
@@ -278,40 +244,40 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     fun displayEnemyRoll(diceArray: List<String>){
         when(diceArray.size) {
             0 -> {
-                setDiceImage(dice_no6,8)
-                setDiceImage(dice_no7,8)
-                setDiceImage(dice_no8,8)
-                setDiceImage(dice_no9,8)
-                setDiceImage(dice_no10,8)
+                setDiceImage(dice_no6,7)
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
             }
 
             1 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
-                setDiceImage(dice_no7,8)
-                setDiceImage(dice_no8,8)
-                setDiceImage(dice_no9,8)
-                setDiceImage(dice_no10,8)
+                setDiceImage(dice_no7,7)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
             }
             2 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
                 setDiceImage(dice_no7,diceArray[1].toInt())
-                setDiceImage(dice_no8,8)
-                setDiceImage(dice_no9,8)
-                setDiceImage(dice_no10,8)
+                setDiceImage(dice_no8,7)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
             }
             3 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
                 setDiceImage(dice_no7,diceArray[1].toInt())
                 setDiceImage(dice_no8,diceArray[2].toInt())
-                setDiceImage(dice_no9,8)
-                setDiceImage(dice_no10,8)
+                setDiceImage(dice_no9,7)
+                setDiceImage(dice_no10,7)
             }
             4 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
                 setDiceImage(dice_no7,diceArray[1].toInt())
                 setDiceImage(dice_no8,diceArray[2].toInt())
                 setDiceImage(dice_no9,diceArray[3].toInt())
-                setDiceImage(dice_no10,8)
+                setDiceImage(dice_no10,7)
             }
             5 -> {
                 setDiceImage(dice_no6,diceArray[0].toInt())
@@ -327,102 +293,30 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     fun displayEnemyNumberOfDice(size: Int) {
         when (size) {
             1 -> {
-                setDiceImage(dice_no6,7)
+                setDiceImage(dice_no6,8)
+            }
+            2 -> {
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+            }
+            3 -> {
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+                setDiceImage(dice_no8,8)
+            }
+            4 -> {
+                setDiceImage(dice_no6,8)
+                setDiceImage(dice_no7,8)
+                setDiceImage(dice_no8,8)
+                setDiceImage(dice_no9,8)
+            }
+            5 -> {
+                setDiceImage(dice_no6,8)
                 setDiceImage(dice_no7,8)
                 setDiceImage(dice_no8,8)
                 setDiceImage(dice_no9,8)
                 setDiceImage(dice_no10,8)
             }
-            2 -> {
-                setDiceImage(dice_no6,7)
-                setDiceImage(dice_no7,7)
-                setDiceImage(dice_no8,8)
-                setDiceImage(dice_no9,8)
-                setDiceImage(dice_no10,8)
-            }
-            3 -> {
-                setDiceImage(dice_no6,7)
-                setDiceImage(dice_no7,7)
-                setDiceImage(dice_no8,7)
-                setDiceImage(dice_no9,8)
-                setDiceImage(dice_no10,8)
-            }
-            4 -> {
-                setDiceImage(dice_no6,7)
-                setDiceImage(dice_no7,7)
-                setDiceImage(dice_no8,7)
-                setDiceImage(dice_no9,7)
-                setDiceImage(dice_no10,8)
-            }
-            5 -> {
-                setDiceImage(dice_no6,7)
-                setDiceImage(dice_no7,7)
-                setDiceImage(dice_no8,7)
-                setDiceImage(dice_no9,7)
-                setDiceImage(dice_no10,7)
-            }
-        }
-    }
-
-    fun displayDice(diceArray: List<Int>) {
-        when(diceArray.size) {
-            0 -> {
-                setDiceImage(dice_no1,8)
-                setDiceImage(dice_no2,8)
-                setDiceImage(dice_no3,8)
-                setDiceImage(dice_no4,8)
-                setDiceImage(dice_no5,8)
-            }
-
-            1 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,8)
-                setDiceImage(dice_no3,8)
-                setDiceImage(dice_no4,8)
-                setDiceImage(dice_no5,8)
-            }
-            2 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,8)
-                setDiceImage(dice_no4,8)
-                setDiceImage(dice_no5,8)
-            }
-            3 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,diceArray[2])
-                setDiceImage(dice_no4,8)
-                setDiceImage(dice_no5,8)
-            }
-            4 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,diceArray[2])
-                setDiceImage(dice_no4,diceArray[3])
-                setDiceImage(dice_no5,8)
-            }
-            5 -> {
-                setDiceImage(dice_no1,diceArray[0])
-                setDiceImage(dice_no2,diceArray[1])
-                setDiceImage(dice_no3,diceArray[2])
-                setDiceImage(dice_no4,diceArray[3])
-                setDiceImage(dice_no5,diceArray[4])
-            }
-        }
-        //saveToExternalStorage(diceArray)
-    }
-
-    private fun setDiceImage(imageView: ImageView, number: Int){
-        when (number) {
-            1 -> imageView.setImageResource(R.drawable.ic_dice_1)
-            2 -> imageView.setImageResource(R.drawable.ic_dice_2)
-            3 -> imageView.setImageResource(R.drawable.ic_dice_3)
-            4 -> imageView.setImageResource(R.drawable.ic_dice_4)
-            5 -> imageView.setImageResource(R.drawable.ic_dice_5)
-            6 -> imageView.setImageResource(R.drawable.ic_dice_6)
-            7 -> imageView.setImageResource(R.drawable.ic_information)
-            8 -> imageView.setImageDrawable(null)
         }
     }
 
@@ -448,7 +342,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //display win lost
     fun displayWin(win: String) {
-        txt_result.text = "You $win last round. Shake to go to next round."
+        txt_result.text = getString(R.string.round_result_msg, win)
     }
 
     //go to result
@@ -460,7 +354,67 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         }
     }
 
+    fun displayDice(diceArray: List<Int>) {
+        when(diceArray.size) {
+            0 -> {
+                setDiceImage(dice_no1,7)
+                setDiceImage(dice_no2,7)
+                setDiceImage(dice_no3,7)
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
 
+            1 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,7)
+                setDiceImage(dice_no3,7)
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
+            2 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,7)
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
+            3 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,7)
+                setDiceImage(dice_no5,7)
+            }
+            4 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,diceArray[3])
+                setDiceImage(dice_no5,7)
+            }
+            5 -> {
+                setDiceImage(dice_no1,diceArray[0])
+                setDiceImage(dice_no2,diceArray[1])
+                setDiceImage(dice_no3,diceArray[2])
+                setDiceImage(dice_no4,diceArray[3])
+                setDiceImage(dice_no5,diceArray[4])
+            }
+        }
+        //saveToExternalStorage(diceArray)
+    }
+
+    private fun setDiceImage(imageView: ImageView, number: Int){
+        when (number) {
+            1 -> imageView.setImageResource(R.drawable.ic_dice_1)
+            2 -> imageView.setImageResource(R.drawable.ic_dice_2)
+            3 -> imageView.setImageResource(R.drawable.ic_dice_3)
+            4 -> imageView.setImageResource(R.drawable.ic_dice_4)
+            5 -> imageView.setImageResource(R.drawable.ic_dice_5)
+            6 -> imageView.setImageResource(R.drawable.ic_dice_6)
+            7 -> imageView.setImageResource(R.drawable.ic_dice_)
+            8 -> imageView.setImageResource(R.drawable.ic_dice_)
+        }
+    }
 
     private inner class GameMaster(val bluetoothService: MyBluetoothService, val playActivity: PlayActivity) {
         // Game Master class is to help control the flow of the game

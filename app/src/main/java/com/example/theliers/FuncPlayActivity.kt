@@ -56,18 +56,18 @@ class FuncPlayActivity : AppCompatActivity()  {
     private val gameMaster = GameMaster(bluetoothService, this)
 
     //array list of int for spinner
-    var totalList = listOf(1,2,3,4,5,6,7,8,9,10)
-    var dicelist = listOf(1,2,3,4,5,6)
+    private var totalList = listOf(1,2,3,4,5,6,7,8,9,10)
+    private var dicelist = listOf(1,2,3,4,5,6)
 
     //int to remember last opponent bid
-    var totalBid = 0
-    var typeBid = 0
+    private var totalBid = 0
+    private var typeBid = 0
 
     //string to remember players choice
-    var opponentBid = ""
-    var yourBid = ""
+    private var opponentBid = ""
+    private var yourBid = ""
 
-    var startIndex = 0
+    private var startIndex = 0
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -78,7 +78,8 @@ class FuncPlayActivity : AppCompatActivity()  {
         callButton.isEnabled = false
         totalSpinner.isEnabled = false
         typeSpinner.isEnabled = false
-        enemyRoll.text = "enemy has 5 dice"
+        enemyRoll.text = getString(R.string.enemy_5dice)
+
         //set up spinner
         setUpSpinner()
 
@@ -109,14 +110,14 @@ class FuncPlayActivity : AppCompatActivity()  {
     fun gameInit(playOder: String) {
         when(playOder) {
             "first" -> {
-                turnView.text = "You go first"
+                turnView.text = getString(R.string.you_first)
                 gameMaster.rollDice()
                 takeFirstTurn()
                 startGameButton.isEnabled = false
             }
 
             "second" -> {
-                turnView.text = "You go second"
+                turnView.text = getString(R.string.you_second)
                 gameMaster.rollDice() //roll from 0 to 4 aka 5 dice
                 passTurn()
                 startGameButton.isEnabled = false
@@ -132,7 +133,7 @@ class FuncPlayActivity : AppCompatActivity()  {
 
     //take your turn
     fun takeFirstTurn() {
-        turnView.text = "Your go first"
+        turnView.text = getString(R.string.you_first)
         guessButton.isEnabled = true
         totalSpinner.isEnabled = true
         typeSpinner.isEnabled = true
@@ -140,7 +141,7 @@ class FuncPlayActivity : AppCompatActivity()  {
 
     //take your turn
     fun takeTurn() {
-        turnView.text = "Your turn"
+        turnView.text = getString(R.string.your_turn)
         guessButton.isEnabled = true
         callButton.isEnabled = true
         totalSpinner.isEnabled = true
@@ -149,7 +150,7 @@ class FuncPlayActivity : AppCompatActivity()  {
 
     //pass your turn
     fun passTurn(){
-        turnView.text = "Opponent turn"
+        turnView.text = getString(R.string.opponent_turn)
         guessButton.isEnabled = false
         callButton.isEnabled = false
         totalSpinner.isEnabled = false
@@ -169,13 +170,13 @@ class FuncPlayActivity : AppCompatActivity()  {
         takeTurn()
     }
     // check illegal
-    fun checkIllegal(total: Int, dice: Int): Boolean {
+    private fun checkIllegal(total: Int, dice: Int): Boolean {
         if(total < totalBid || dice < typeBid) return true
         if(total == totalBid && dice == typeBid) return true
         return false
     }
     //bid
-    fun guess() {
+    private fun guess() {
         val total = totalSpinner.selectedItem.toString()
         val type = typeSpinner.selectedItem.toString()
 
@@ -194,7 +195,7 @@ class FuncPlayActivity : AppCompatActivity()  {
     }
 
     //set up spinner
-    fun setUpSpinner() {
+    private fun setUpSpinner() {
         //set up total spinner
         totalSpinner.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,totalList)
 
@@ -321,7 +322,7 @@ class FuncPlayActivity : AppCompatActivity()  {
         fun decideWin(opponentRoll: String) {
             funcPlayActivity.displayEnemyRoll(opponentRoll)
             val oppRollList = opponentRoll.split("-")
-            var joinedList = oppRollList.toMutableList()
+            val joinedList = oppRollList.toMutableList()
             yourRollList.forEach{
                 joinedList.add(it.toString())
             }

@@ -1,5 +1,6 @@
 package com.example.theliers
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
@@ -8,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_rules.*
 import okhttp3.*
@@ -20,7 +20,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 @Suppress("DEPRECATION")
-class Fragment_Rules: Fragment() {
+class FragmentRules: Fragment() {
 
     lateinit var jsonArr:JSONArray
     var jsonArrIndex:Int = 0
@@ -35,6 +35,7 @@ class Fragment_Rules: Fragment() {
 
     }
 
+    @SuppressLint("StringFormatMatches", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,24 +46,24 @@ class Fragment_Rules: Fragment() {
             }
 
         btn_goBackFromRules.setOnClickListener {
-            val fr = getFragmentManager()?.beginTransaction()
-            fr?.replace(R.id.fragment, Fragment_Menu())
+            val fr = fragmentManager?.beginTransaction()
+            fr?.replace(R.id.fragment, FragmentMenu())
             fr?.commit()
         }
 
         btn_leftArrow.setOnClickListener {
             jsonArrIndex--
             if (jsonArrIndex <0) jsonArrIndex = 0
-            txt_stepTitle.text = "Step "+jsonArrIndex+" : "+ jsonArr.getJSONObject(jsonArrIndex).getString("title")
-            txt_stepContent.text = jsonArr.getJSONObject(jsonArrIndex).getString("content") +"\n"+jsonArr.getJSONObject(jsonArrIndex).getString("example")
+            txt_stepTitle.text = getString(R.string.step_title, jsonArrIndex, jsonArr.getJSONObject(jsonArrIndex).getString("title"))
+            txt_stepContent.text = getString(R.string.step_content, jsonArr.getJSONObject(jsonArrIndex).getString("content"), jsonArr.getJSONObject(jsonArrIndex).getString("example"))
             downloadImageUsingOkHTTP(jsonArr.getJSONObject(jsonArrIndex).getString("imageURL"))
         }
 
         btn_rightArrow.setOnClickListener {
             jsonArrIndex++
             if (jsonArrIndex == jsonArr.length()) jsonArrIndex = jsonArr.length()-1
-            txt_stepTitle.text = "Step "+jsonArrIndex+" : "+ jsonArr.getJSONObject(jsonArrIndex).getString("title")
-            txt_stepContent.text = jsonArr.getJSONObject(jsonArrIndex).getString("content") +"\n"+jsonArr.getJSONObject(jsonArrIndex).getString("example")
+            txt_stepTitle.text = getString(R.string.step_title, jsonArrIndex, jsonArr.getJSONObject(jsonArrIndex).getString("title"))
+            txt_stepContent.text = getString(R.string.step_content, jsonArr.getJSONObject(jsonArrIndex).getString("content"), jsonArr.getJSONObject(jsonArrIndex).getString("example"))
             downloadImageUsingOkHTTP(jsonArr.getJSONObject(jsonArrIndex).getString("imageURL"))
         }
 
@@ -71,10 +72,11 @@ class Fragment_Rules: Fragment() {
 
     // create a handle to add message
     private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
+        @SuppressLint("StringFormatMatches")
         override fun handleMessage(inputMessage: Message) { if (inputMessage.what == 0) {
             jsonArr = JSONArray(inputMessage.obj.toString())
-            txt_stepTitle.text = "Step 0 : "+jsonArr.getJSONObject(0).getString("title")
-            txt_stepContent.text = jsonArr.getJSONObject(0).getString("content") +"\n"+jsonArr.getJSONObject(jsonArrIndex).getString("example")
+            txt_stepTitle.text = getString(R.string.step_title, 0, jsonArr.getJSONObject(jsonArrIndex).getString("title"))
+            txt_stepContent.text = getString(R.string.step_content, jsonArr.getJSONObject(0).getString("content"), jsonArr.getJSONObject(jsonArrIndex).getString("example"))
             downloadImageUsingOkHTTP(jsonArr.getJSONObject(0).getString("imageURL"))
         }
         }
@@ -90,9 +92,9 @@ class Fragment_Rules: Fragment() {
 
     //create a worker with a Handler as parameter
     class Conn(mHand: Handler): Runnable {
-        val myHandler = mHand
+        private val myHandler = mHand
         override fun run() {
-            var content = StringBuilder()
+            val content = StringBuilder()
             try {
                 // declare URL to text file, create a connection to it and put into stream.
                 val myUrl = URL("http://users.metropolia.fi/~thanhvl/Liar-Dice-Rules.json")
