@@ -29,7 +29,7 @@ class LoseActivity : AppCompatActivity() {
         if( Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             val sharedPreference = SharedPreference(this)
             val userName = sharedPreference.getUsername()
-            val opponentName = sharedPreference.getEnemyName()
+            val opponentName: String = sharedPreference.getEnemyName()
             val timeStamp: String = SimpleDateFormat("dd.MM.yyyy HH:mm").format(Date())
             val inputText = "[MatchResult:] $timeStamp : $userName LOSE AGAINST $opponentName \n"
             val filePath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)

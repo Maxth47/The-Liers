@@ -10,7 +10,6 @@ import com.example.theliers.SearchActivity
 object BluetoothHandler {
 
     lateinit var socket: BluetoothSocket
-    private var type: Boolean = false
     val bluetoothAdaptor: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 
     fun checkBluetoothAvail(): Boolean {
@@ -33,7 +32,9 @@ object BluetoothHandler {
     }
 
     fun cancelBluetoothDiscovery() {
-        bluetoothAdaptor!!.cancelDiscovery()
+        if(bluetoothAdaptor!!.isDiscovering){
+            bluetoothAdaptor.cancelDiscovery()
+        }
     }
 
     fun checkBluetoothBond() {
@@ -66,8 +67,7 @@ object BluetoothHandler {
 
     fun startBluetoothComm (handler: Handler): MyBluetoothService {
         val connectionService = MyBluetoothService(
-            handler,
-            type
+            handler
         )
         println("-------------------------------------------------------")
         println("--------------------starting commute-------------------")

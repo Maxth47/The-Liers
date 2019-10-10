@@ -71,7 +71,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        // Don't forget to unregister the ACTION_FOUND receiver.
+        BluetoothHandler.cancelBluetoothDiscovery()
         unregisterReceiver(receiver)
     }
 

@@ -37,8 +37,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                         }
 
                         "bid" -> {
-                            getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             hearShake()
+                            getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             takeTurn()
                         }
 
@@ -100,11 +100,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             val shakeDetector = ShakeDetector(this)
             shakeDetector.start(sensorManager)
         }
-
-        /*btn_quit.setOnClickListener {
-            bluetoothService.stopConnect()
-            finish()
-        }*/
 
         btn_call.setOnClickListener {
             gameMaster.call()
