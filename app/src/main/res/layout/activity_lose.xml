@@ -5,21 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".LoseActivity">
+    tools:context=".LoseActivity"
+    android:background="@drawable/dice_screen_bw">
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/you_lose"
-        />
+        android:textColor="@color/colorOrange"
+        android:textSize="50dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:fontFamily="@font/press_start_2p"
         android:text="@string/go_back"
-        />
+        android:textSize="14sp" />
 </LinearLayout>
