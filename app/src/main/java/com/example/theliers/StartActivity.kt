@@ -20,6 +20,7 @@ class StartActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // check the name input and go to Menu activity
         btn_start.setOnClickListener {
             if (edt_name.text.isNotEmpty()){
                 val sharedPreferenceX = SharedPreference(this)

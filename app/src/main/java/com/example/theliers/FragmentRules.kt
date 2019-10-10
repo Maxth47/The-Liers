@@ -44,12 +44,14 @@ class FragmentRules: Fragment() {
                 myThread.start()
             }
 
+        // go back to Menu Fragment
         btn_goBackFromRules.setOnClickListener {
             val fr = fragmentManager?.beginTransaction()
             fr?.replace(R.id.fragment, FragmentMenu())
             fr?.commit()
         }
 
+        // load content for last step
         btn_leftArrow.setOnClickListener {
             jsonArrIndex--
             if (jsonArrIndex <0) jsonArrIndex = 0
@@ -58,6 +60,7 @@ class FragmentRules: Fragment() {
             downloadImageUsingOkHTTP(jsonArr.getJSONObject(jsonArrIndex).getString("imageURL"))
         }
 
+        // load content for new step
         btn_rightArrow.setOnClickListener {
             jsonArrIndex++
             if (jsonArrIndex == jsonArr.length()) jsonArrIndex = jsonArr.length()-1
@@ -116,6 +119,7 @@ class FragmentRules: Fragment() {
     }
 
 
+    // load image from imageURL
     private fun downloadImageUsingOkHTTP(imageURL: String) {
         val okRequest = Request.Builder()
             .url(imageURL)
