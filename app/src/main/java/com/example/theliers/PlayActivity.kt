@@ -39,8 +39,14 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                         }
 
                         "bid" -> {
-                            getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
-                            takeTurn()
+                            if(playableState) {
+                                gameMaster.startNextRound()
+                                getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
+                                playableState = false
+                            } else {
+                                getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
+                            }
+
                         }
 
                         "call" -> {
@@ -92,8 +98,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         dice_no9.setImageResource(R.drawable.question_dice)
         dice_no10.setImageResource(R.drawable.question_dice)
         displayBid("")
-        callButton.isEnabled = false
-        order_container.visibility = View.GONE
+
 
         if (playableState){
             val sensorManager = this.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -109,9 +114,14 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             bid()
         }
 
+
         val sharedPreference = SharedPreference(this)
         userName =  sharedPreference.getUsername()
         bluetoothService.sendInfo("greet$gibberish"+userName+gibberish+"0")
+
+        //callButton.isEnabled = false
+        btn_call.isEnabled = false
+        order_container.visibility = View.GONE
     }
 
     override fun onBackPressed() {
@@ -173,6 +183,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     //take your turn
     fun takeFirstTurn() {
         displayInfo("Your go first")
+        btn_call.isEnabled = false
         order_container.visibility = View.VISIBLE
     }
 
@@ -198,8 +209,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         typeBid = dice
         gameMaster.setCurrentBid(total,dice)
         println("------ current bid ------")
-        println(gameMaster.currentBid)
-        //setSpinnerChoice(total,dice)
         takeTurn()
     }
 
