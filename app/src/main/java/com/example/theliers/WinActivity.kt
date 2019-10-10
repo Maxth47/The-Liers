@@ -40,4 +40,8 @@ class WinActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        // do nothing
+    }
+
 }

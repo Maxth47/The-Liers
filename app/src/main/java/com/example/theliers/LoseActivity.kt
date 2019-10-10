@@ -39,4 +39,8 @@ class LoseActivity : AppCompatActivity() {
             Toast.makeText(this, "No dice saved", Toast.LENGTH_LONG).show()
         }
     }
+
+    override fun onBackPressed() {
+        // do nothing
+    }
 }

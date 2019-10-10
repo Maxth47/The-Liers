@@ -20,5 +20,13 @@ class ChooseActivity : AppCompatActivity() {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
+
+        goBackButton.setOnClickListener {
+            finish()
+        }
+    }
+
+    override fun onBackPressed() {
+        // do nothing
     }
 }

@@ -21,17 +21,22 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="679dp"
-        android:layout_height="232dp"
-        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="1"
         android:padding="5dp" />
 
     <Button
-        android:layout_marginTop="8dp"
         android:id="@+id/cancelSearchButton"
         android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/cancel" />
 
