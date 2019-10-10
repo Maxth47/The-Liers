@@ -22,9 +22,9 @@
         <activity android:name=".ChooseActivity" android:screenOrientation="landscape"/>
         <activity android:name=".HostActivity" android:screenOrientation="landscape"/>
         <activity android:name=".PlayActivity"  android:screenOrientation="landscape"/>
-        <activity android:name=".StartActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".MenuActivity" android:screenOrientation="landscape"/>
         <activity
-            android:name=".MenuActivity"
+            android:name=".StartActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theliers.MY_UUID
@@ -67,19 +68,23 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
                     val fallbackSocket = m.invoke(socket.remoteDevice, Integer.valueOf(1)) as BluetoothSocket*/
                     //---------------
                     println(socket)
-                    socket.connect()
-                    println("checking connection status")
-                    println("+++++++")
-                    println(socket.isConnected)
-                    println(socket.remoteDevice)
-                    // The connection attempt succeeded. Perform work associated with
-                    // the connection in a separate thread.
-                    // false is for client
-                    BluetoothHandler.manageMyConnectedSocket(socket, false, searchActivity, null)
-                    //val intent = Intent(this,MainActivity::class.java)
+                    try{
+                        socket.connect()
+                        println("checking connection status")
+                        println("+++++++")
+                        println(socket.isConnected)
+                        println(socket.remoteDevice)
+                        // The connection attempt succeeded. Perform work associated with
+                        // the connection in a separate thread.
+                        // false is for client
+                        BluetoothHandler.manageMyConnectedSocket(socket, false, searchActivity, null)
+                        //val intent = Intent(this,MainActivity::class.java)
+                    } catch (e: Exception) {
+                        Toast.makeText(searchActivity, "Player cannot be connected", Toast.LENGTH_LONG).show()
+                    }
+
                 }
             }
-
             // Closes the client socket and causes the thread to finish.
             fun cancel() {
                 try {
