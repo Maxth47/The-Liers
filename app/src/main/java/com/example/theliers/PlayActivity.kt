@@ -13,7 +13,6 @@ import android.widget.Toast
 import com.example.theliers.bluetooth.BluetoothHandler
 import com.example.theliers.bluetooth.MyBluetoothService
 import com.squareup.seismic.ShakeDetector
-import kotlinx.android.synthetic.main.activity_func_play.*
 import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.activity_play.totalSpinner
 import kotlinx.android.synthetic.main.activity_play.typeSpinner
@@ -43,6 +42,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                                 gameMaster.startNextRound()
                                 getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                                 playableState = false
+
                             } else {
                                 getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             }
@@ -62,6 +62,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             }
         }
     }
+
 
     private val gibberish = "--!@#$%^)+_-&*--"
     private val bluetoothService = BluetoothHandler.startBluetoothComm(mHandler)
