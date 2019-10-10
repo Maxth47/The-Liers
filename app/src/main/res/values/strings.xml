@@ -34,8 +34,8 @@
     <string name="bid">Bid</string>
     <string name="cancel">Cancel</string>
     <string name="dice">Dice</string>
-    <string name="number_of_dice">N</string>
-    <string name="kind_of_dice">X</string>
+    <string name="number_of_dice">Number of Dice</string>
+    <string name="kind_of_dice">Kind of Dice</string>
     <string name="opponent_turn">Opponent Turn</string>
     <string name="go_back">Go Back</string>
     <string name="reset">Reset</string>

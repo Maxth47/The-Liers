@@ -10,4 +10,5 @@
     <color name="colorOrange">#F2561D</color>
     <color name="transparentPrimaryDark">#40384039</color>
     <color name="transparentPrimary">#40F2BE22</color>
+    <color name="gray">#BFA78A</color>
 </resources>

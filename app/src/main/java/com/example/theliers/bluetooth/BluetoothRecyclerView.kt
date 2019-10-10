@@ -66,6 +66,7 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
                     val m = clazz.getMethod("createRfcommSocket", *paramTypes)
                     val fallbackSocket = m.invoke(socket.remoteDevice, Integer.valueOf(1)) as BluetoothSocket*/
                     //---------------
+                    println(socket)
                     socket.connect()
                     println("checking connection status")
                     println("+++++++")
