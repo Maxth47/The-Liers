@@ -21,7 +21,7 @@ object BluetoothHandler {
     }
 
     fun startBluetoothDiscovery() {
-        //bluetoothAdaptor!!.cancelDiscovery()
+        cancelBluetoothDiscovery()
         println(bluetoothAdaptor!!.startDiscovery())
         var index = 0
         while (bluetoothAdaptor.isDiscovering) {

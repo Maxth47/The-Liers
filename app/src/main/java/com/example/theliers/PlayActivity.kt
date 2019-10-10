@@ -13,19 +13,21 @@ import android.widget.Toast
 import com.example.theliers.bluetooth.BluetoothHandler
 import com.example.theliers.bluetooth.MyBluetoothService
 import com.squareup.seismic.ShakeDetector
+import kotlinx.android.synthetic.main.activity_func_play.*
 import kotlinx.android.synthetic.main.activity_play.*
+import kotlinx.android.synthetic.main.activity_play.totalSpinner
+import kotlinx.android.synthetic.main.activity_play.typeSpinner
 
 class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.OnItemSelectedListener {
 
     private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(inputMessage: Message) {
-            println("does this receive?")
+
             if (inputMessage.what == 1) {
                 val receivedString = inputMessage.obj as String
                 val order = receivedString.split(gibberish)
-                println("decode ms")
                 if(order.size == 3) {
-                    println(order)
+
                     when (order[0]) {
                         "greet" -> {
                             getOpponentName(order[1])
@@ -37,7 +39,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                         }
 
                         "bid" -> {
-                            hearShake()
                             getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             takeTurn()
                         }
@@ -52,7 +53,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                         }
                     }
                 }
-                println("it works somewhat")
             }
         }
     }
@@ -63,7 +63,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     //array list of int for spinner
     private var totalList = listOf(1,2,3,4,5,6,7,8,9,10)
-    private var dicelist = listOf(1,2,3,4,5,6)
+    private var diceList = listOf(1,2,3,4,5,6)
 
     //int to remember last opponent bid
     private var totalBid = 0
@@ -92,7 +92,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         dice_no9.setImageResource(R.drawable.question_dice)
         dice_no10.setImageResource(R.drawable.question_dice)
         displayBid("")
-
+        callButton.isEnabled = false
         order_container.visibility = View.GONE
 
         if (playableState){
@@ -142,7 +142,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
 
     // get opponent name
     fun getOpponentName(name: String) {
-
         val sharedPreference = SharedPreference(this)
         sharedPreference.setEnemyname(name)
     }
@@ -174,15 +173,14 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     //take your turn
     fun takeFirstTurn() {
         displayInfo("Your go first")
-
         order_container.visibility = View.VISIBLE
     }
 
     //take your turn
     fun takeTurn() {
         displayInfo("Your go")
-
         order_container.visibility = View.VISIBLE
+        btn_call.isEnabled = true
     }
 
     //pass your turn
@@ -236,7 +234,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
         totalSpinner.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,totalList)
 
         //set type spinner
-        typeSpinner.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,dicelist)
+        typeSpinner.adapter = ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,diceList)
 
 
     }

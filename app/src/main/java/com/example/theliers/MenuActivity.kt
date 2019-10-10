@@ -40,4 +40,9 @@ class MenuActivity : AppCompatActivity() {
         val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
         startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
     }
+
+    // do nothing on back button
+    override fun onBackPressed() {
+        // do nothing on back button
+    }
 }
