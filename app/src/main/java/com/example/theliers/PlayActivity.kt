@@ -37,8 +37,8 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                         }
 
                         "bid" -> {
-                            getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             hearShake()
+                            getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             takeTurn()
                         }
 
