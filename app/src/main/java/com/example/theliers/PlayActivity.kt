@@ -101,11 +101,6 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             shakeDetector.start(sensorManager)
         }
 
-        /*btn_quit.setOnClickListener {
-            bluetoothService.stopConnect()
-            finish()
-        }*/
-
         btn_call.setOnClickListener {
             gameMaster.call()
         }

@@ -1,7 +1,6 @@
 package com.example.theliers.bluetooth
 
 import android.bluetooth.BluetoothSocket
-import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 
@@ -10,11 +9,9 @@ import java.nio.charset.StandardCharsets
 
 
 const val MESSAGE_READ = 1
-const val MESSAGE_TOAST = 2
-const val MESSAGE_WRITE = 3
 private const val TAG = "MY_APP_DEBUG_TAG"
 
-class MyBluetoothService(private val handler: Handler, val type: Boolean) {
+class MyBluetoothService(private val handler: Handler) {
     private lateinit var mThread: ConnectedThread
 
     fun initCommunication(socket: BluetoothSocket) {
@@ -44,7 +41,7 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
 
             // Keep listening to the InputStream until an exception occurs.
             while (true) {
-                val mmBuffer: ByteArray = ByteArray(DEFAULT_BUFFER_SIZE)
+                val mmBuffer = ByteArray(DEFAULT_BUFFER_SIZE)
                 // Read from the InputStream.
                 numBytes = try {
                     mmInStream.read(mmBuffer)
@@ -83,12 +80,6 @@ class MyBluetoothService(private val handler: Handler, val type: Boolean) {
                 Log.e(TAG, "Error occurred when sending data", e)
 
                 // Send a failure message back to the activity.
-                val writeErrorMsg = handler.obtainMessage(MESSAGE_TOAST)
-                val bundle = Bundle().apply {
-                    putString("toast", "Couldn't send data to the other device")
-                }
-                //writeErrorMsg.data = bundle
-                //handler.sendMessage(writeErrorMsg)
                 return
             }
 
