@@ -42,6 +42,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
                                 gameMaster.startNextRound()
                                 getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                                 playableState = false
+
                             } else {
                                 getOpponentGuessHistory(order[1].toInt(), order[2].toInt())
                             }
@@ -61,6 +62,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
             }
         }
     }
+
 
     private val gibberish = "--!@#$%^)+_-&*--"
     private val bluetoothService = BluetoothHandler.startBluetoothComm(mHandler)

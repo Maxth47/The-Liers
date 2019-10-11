@@ -57,7 +57,6 @@ class HostActivity : AppCompatActivity() {
                 socket?.also {
                     BluetoothHandler.manageMyConnectedSocket(it, true, null, hostActivity)
                     // true is for host
-                    println("closes server socket")
                     mmServerSocket?.close()
                     shouldLoop = false
                 }

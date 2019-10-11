@@ -59,14 +59,6 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
                 bluetoothAdaptor?.cancelDiscovery()
 
                 mmSocket?.let { socket ->
-                    // Connect to the remote device through the socket. This call blocks
-                    // until it succeeds or throws an exception.
-                    //---------------
-                    /*val clazz = socket.remoteDevice.javaClass
-                    val paramTypes = arrayOf<Class<*>>(Integer.TYPE)
-                    val m = clazz.getMethod("createRfcommSocket", *paramTypes)
-                    val fallbackSocket = m.invoke(socket.remoteDevice, Integer.valueOf(1)) as BluetoothSocket*/
-                    //---------------
                     println(socket)
                     try{
                         socket.connect()
@@ -94,5 +86,9 @@ class BluetoothItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
                 }
             }
         }
+
+
+
+
     }
 }

@@ -28,7 +28,7 @@ class FragmentHistory: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         txt_history.isSelected = true
-
+        // Get data from history file in external storage, then pass to scrollable textView.
         if(Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
             val filePath = context?.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
             val file = File(filePath, "History.txt")
@@ -40,12 +40,14 @@ class FragmentHistory: Fragment() {
             else txt_history.text = getString(R.string.history_empty)
         }
 
+        // Go back to Menu
         btn_goBackFromHistory.setOnClickListener {
             val fr = fragmentManager?.beginTransaction()
             fr?.replace(R.id.fragment, FragmentMenu())
             fr?.commit()
         }
 
+        // Calculate the winning ratio
         val numberOfMatches = history.split("[MatchResult:]").size-1
         val numberOfWinMatches = history.split("WIN").size-1
         var winningRatio = 0
