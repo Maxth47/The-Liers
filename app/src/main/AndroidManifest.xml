@@ -13,9 +13,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/dice_screen"
+        android:icon="@drawable/dice_logo_2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/GameTheme">
         <activity android:name=".LoseActivity" android:screenOrientation="landscape"/>

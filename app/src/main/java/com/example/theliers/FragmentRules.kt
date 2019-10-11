@@ -92,7 +92,6 @@ class FragmentRules: Fragment() {
         return cm.activeNetworkInfo?.isConnected == true
     }
 
-
     //create a worker with a Handler as parameter
     class Conn(mHand: Handler): Runnable {
         private val myHandler = mHand
@@ -118,7 +117,6 @@ class FragmentRules: Fragment() {
         }
 
     }
-
 
     // load image from imageURL
     private fun downloadImageUsingOkHTTP(imageURL: String) {
