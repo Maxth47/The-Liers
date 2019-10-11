@@ -73,12 +73,13 @@ class FragmentRules: Fragment() {
     // create a handle to add message
     private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
         @SuppressLint("StringFormatMatches")
-        override fun handleMessage(inputMessage: Message) { if (inputMessage.what == 0) {
-            jsonArr = JSONArray(inputMessage.obj.toString())
-            txt_stepTitle.text = getString(R.string.step_title, 0, jsonArr.getJSONObject(jsonArrIndex).getString("title"))
-            txt_stepContent.text = getString(R.string.step_content, jsonArr.getJSONObject(0).getString("content"), jsonArr.getJSONObject(jsonArrIndex).getString("example"))
-            downloadImageUsingOkHTTP(jsonArr.getJSONObject(0).getString("imageURL"))
-        }
+        override fun handleMessage(inputMessage: Message) {
+            if (inputMessage.what == 0) {
+                jsonArr = JSONArray(inputMessage.obj.toString())
+                txt_stepTitle.text = getString(R.string.step_title, 0, jsonArr.getJSONObject(jsonArrIndex).getString("title"))
+                txt_stepContent.text = getString(R.string.step_content, jsonArr.getJSONObject(0).getString("content"), jsonArr.getJSONObject(jsonArrIndex).getString("example"))
+                downloadImageUsingOkHTTP(jsonArr.getJSONObject(0).getString("imageURL"))
+            }
         }
     }
 

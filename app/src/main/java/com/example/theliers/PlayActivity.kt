@@ -13,7 +13,6 @@ import android.widget.Toast
 import com.example.theliers.bluetooth.BluetoothHandler
 import com.example.theliers.bluetooth.MyBluetoothService
 import com.squareup.seismic.ShakeDetector
-import kotlinx.android.synthetic.main.activity_func_play.*
 import kotlinx.android.synthetic.main.activity_play.*
 import kotlinx.android.synthetic.main.activity_play.totalSpinner
 import kotlinx.android.synthetic.main.activity_play.typeSpinner
@@ -153,7 +152,7 @@ class PlayActivity : AppCompatActivity(), ShakeDetector.Listener, AdapterView.On
     // get opponent name
     fun getOpponentName(name: String) {
         val sharedPreference = SharedPreference(this)
-        sharedPreference.setEnemyname(name)
+        sharedPreference.setEnemyName(name)
     }
 
     //reset playable

@@ -1,15 +1,14 @@
 package com.example.theliers
 
 import android.content.Context
-import android.content.SharedPreferences
 
 class SharedPreference(context: Context) {
 
-    private var preferenceUserName = "SharedPreference_Username"
+    private var preferenceUserName: String = "SharedPreference_Username"
     private var preferenceEnemyName = "SharedPreference_Enemy_Name"
 
 
-    private val preference: SharedPreferences = context.getSharedPreferences(preferenceUserName, Context.MODE_PRIVATE)
+    private val preference = context.getSharedPreferences(preferenceUserName, Context.MODE_PRIVATE)
 
     fun getUsername(): String {
         return preference.getString(preferenceUserName, "").toString()
@@ -25,7 +24,7 @@ class SharedPreference(context: Context) {
         return preference.getString(preferenceEnemyName, "").toString()
     }
 
-    fun setEnemyname(name:String){
+    fun setEnemyName(name:String){
         val editor = preference.edit()
         editor.putString(preferenceEnemyName, name)
         editor.apply()
